@@ -5,6 +5,7 @@ public static class MinimumSwaps
     /// <summary>
     /// Returns minimum swaps that need to happen in order to sort an array.
     /// </summary>
+    /// <remarks>Not optimal solution.</remarks>
     /// <param name="array"></param>
     /// <returns></returns>
     public static int Get(int[] array)
