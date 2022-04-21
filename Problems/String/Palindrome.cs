@@ -33,7 +33,7 @@ public static class Palindrome
     private static string ReverseString(string word)
     {
         var wordArray = word.ToCharArray();
-        Array.Reverse(wordArray);
+        System.Array.Reverse(wordArray);
         return new(wordArray);
     }
 
