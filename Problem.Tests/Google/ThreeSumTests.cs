@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using FluentAssertions;
 using Problems.Array;
+using Problems.Google;
 using Xunit;
-using Xunit.Extensions;
 
-namespace Problem.Tests.Array;
+namespace Problem.Tests.Google;
 
 public class ThreeSumTests
 {

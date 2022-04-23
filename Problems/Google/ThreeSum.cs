@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Reflection.Metadata.Ecma335;
-
-namespace Problems.Array;
+﻿namespace Problems.Google;
 
 public static class ThreeSum
 {
