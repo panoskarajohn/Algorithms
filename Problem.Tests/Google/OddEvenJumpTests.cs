@@ -11,6 +11,7 @@ public class OddEvenJumpTests
     [InlineData(new int[] { 2,3,1,1,4},3)]
     [InlineData(new int[] { 5,1,3,4,2},3)]
     [InlineData(new int[] { 14,13,15},3)]
+    [InlineData(new int[] { 81,54,96,60,58},2)]
     public void Odd_Even_Jump_Tests(int[] array , int expected)
     {
         var result = OddEvenJump.OddEvenJumps(array);

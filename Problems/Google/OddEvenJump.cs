@@ -1,4 +1,6 @@
-﻿namespace Problems.Google;
+﻿using System.Reflection.Metadata;
+
+namespace Problems.Google;
 
 public static class OddEvenJump
 {
@@ -35,24 +37,28 @@ public static class OddEvenJump
     }
     
     private static int[] GetNextJumps(int[] arr, bool high){
-        int[] next = Enumerable.Repeat(-1, arr.Length).ToArray();
+        int[] next = new int[arr.Length];
         
         var sortedList = arr.Select((x, i) => new KeyValuePair<int, int>(x, i));
         
         if(high)
-            sortedList = sortedList.OrderBy(x => x.Key).ToList();
+            sortedList = sortedList
+                .OrderBy(x => x.Key)
+                .ThenBy(x => x.Value)
+                .ToList();
         else
-            sortedList = sortedList.OrderByDescending(x => x.Key).ToList();
+            sortedList = sortedList
+                .OrderByDescending(x => x.Key)
+                .ThenBy(x => x.Value)
+                .ToList();
                             
         Stack<int> stack = new Stack<int>();
-        foreach (var e in sortedList)
+        foreach (var kv in sortedList)
         {
-            while (stack.Count > 0 && stack.Peek() < e.Value)
-                next[stack.Pop()] = e.Value;
-            stack.Push(e.Value);
+            while (stack.Count > 0 && stack.Peek() < kv.Value)
+                next[stack.Pop()] = kv.Value;
+            stack.Push(kv.Value);
         }
         return next;
     }
-
-
 }
