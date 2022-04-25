@@ -1,4 +1,4 @@
-﻿namespace Problems.Google;
+﻿namespace Problems.Google.Arrays;
 
 public static class ThreeSum
 {
