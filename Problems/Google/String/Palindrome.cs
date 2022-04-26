@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Problems.String;
+namespace Problems.Google.String;
 
 public static class Palindrome
 {

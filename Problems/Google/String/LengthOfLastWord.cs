@@ -1,4 +1,4 @@
-﻿namespace Problems.String;
+﻿namespace Problems.Google.String;
 
 public static class LengthOfLastWord
 {
