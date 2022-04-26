@@ -1,4 +1,4 @@
-﻿namespace Problem.Tests.Array;
+﻿namespace Problems.Array;
 
 public static class MinimumSwaps
 {
