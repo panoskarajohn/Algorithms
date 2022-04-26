@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using Problems.String;
+using Problems.Google.String;
 using Xunit;
 
-namespace Problem.Tests.String;
+namespace Problem.Tests.Google.String;
 
 public class PalindromeTests
 {
