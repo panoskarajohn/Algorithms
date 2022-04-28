@@ -24,7 +24,11 @@ public class JumpGame
                     for (int j = i + 1; j < i + jump; j++)
                     {
                         if (canJumpToEnd[j])
+                        {
                             canJumpToEnd[i] = true;
+                            break;
+                        }
+                        
                     }
                 }
             }
