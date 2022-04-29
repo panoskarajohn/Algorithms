@@ -16,20 +16,20 @@ public static class FruitsIntoBaskets
         //basically asks the longest common substring with at most 2 characters
         int max = 1;
         var dictionary = new Dictionary<int, int>();
-        int i = 0;
-        int j = 0;
+        int left = 0;
+        int right = 0;
 
-        while (j < fruits.Length)
+        while (right < fruits.Length)
         {
             if (dictionary.Count <= 2)
             {
-                if (dictionary.ContainsKey(fruits[j]))
+                if (dictionary.ContainsKey(fruits[right]))
                 {
-                    dictionary[fruits[j]] = j++;
+                    dictionary[fruits[right]] = right++;
                 }
                 else
                 {
-                    dictionary.Add(fruits[j], j++);
+                    dictionary.Add(fruits[right], right++);
                 }
 
             }
@@ -42,11 +42,11 @@ public static class FruitsIntoBaskets
                     min = Math.Min(min, value);
                 }
 
-                i = min + 1;
+                left = min + 1;
                 dictionary.Remove(fruits[min]);
             }
 
-            max = Math.Max(max, j - i);
+            max = Math.Max(max, right - left);
         }
 
         return max;
