@@ -10,7 +10,6 @@ public class AddStringTests
     [InlineData("11", "123", "134")]
     [InlineData("456", "77", "533")]
     [InlineData("0", "0", "0")]
-    [InlineData("11", "123", "134")]
     public void Add_String_Tests(string num1, string num2, string expected)
     {
         var result = AddStrings.Add(num1, num2);
