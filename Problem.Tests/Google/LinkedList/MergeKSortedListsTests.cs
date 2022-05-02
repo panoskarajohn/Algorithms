@@ -3,7 +3,7 @@ using FluentAssertions;
 using Problems.Google.LinkedList;
 using Xunit;
 
-namespace Problem.Tests.LinkedList;
+namespace Problem.Tests.Google.LinkedList;
 
 public class MergeKSortedListsTests
 {
