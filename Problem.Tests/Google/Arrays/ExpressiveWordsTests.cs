@@ -18,6 +18,4 @@ public class ExpressiveWordsTests
         var result = ExpressiveWords.Get(s, words);
         result.Should().Be(expected);
     }
-    
-    
 }
