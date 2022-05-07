@@ -1,22 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.Numerics;
 using FluentAssertions;
 using Problems.Google.LinkedList;
 using Xunit;
 
 namespace Problem.Tests.Google.LinkedList;
 
-public class MergeKSortedListsTests
+public class RemoveNthNodeFromEndTests
 {
     [Theory, MemberData(nameof(TestDataProperty))]
-    public void Merge_K_Sorted_Lists_Tests(ListNode[] lists, ListNode expected)
+    public void RemoveNthNodeTests(ListNode input, int n, ListNode expected)
     {
-        var result = new MergeKSortedLists().MergeKLists(lists);
+        var result = RemoveNthNodeFromEnd.Remove(input, n);
         result
             .IsIdentical(expected)
             .Should()
             .BeTrue();
     }
-
+    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -25,16 +26,17 @@ public class MergeKSortedListsTests
             {
                 new object[]
                 {
-                    new List<ListNode> { ListNodeExtensions.Create(1,4,5), ListNodeExtensions.Create(1,3,4), ListNodeExtensions.Create(2,6) },
-                    ListNodeExtensions.Create(1,1,2,3,4,4,5,6)
+                    ListNodeExtensions.Create(1,2,3,4,5), 
+                    2,
+                    ListNodeExtensions.Create(1,2,3,5)
                 },
                 new object[]
                 {
-                    new List<ListNode> { ListNodeExtensions.Create(1,2,2), ListNodeExtensions.Create(1,1,2) },
-                    ListNodeExtensions.Create(1,1,1,2,2,2)
-                },
+                    ListNodeExtensions.Create(1,2), 
+                    1,
+                    ListNodeExtensions.Create(1)
+                }
             };
         }
     }
-
 }
