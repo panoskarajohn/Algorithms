@@ -9,6 +9,14 @@ public class UnionFind {
     private int _numOfComponents = 0;
 
     public int NumberOfComponents => _numOfComponents;
+    
+    /// <summary>
+    /// Checks whether two elements belong in the same component
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    public bool IsConnected(int x, int y) => Find(x) == Find(y);
 
     public UnionFind(int n) 
     {
@@ -21,7 +29,7 @@ public class UnionFind {
         }
     }
 
-    public int Find(int cur) 
+    private int Find(int cur) 
     {
         int root = cur;
         while (root != _parents[root]) {
