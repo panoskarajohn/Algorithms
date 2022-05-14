@@ -10,7 +10,8 @@ public class UnionFind {
 
     public int NumberOfComponents => _numOfComponents;
 
-    public UnionFind(int n) {
+    public UnionFind(int n) 
+    {
         _parents = new int[n];
         _size = new int[n];
         _numOfComponents = n;
@@ -20,7 +21,8 @@ public class UnionFind {
         }
     }
 
-    public int Find(int cur) {
+    public int Find(int cur) 
+    {
         int root = cur;
         while (root != _parents[root]) {
             root = _parents[root];
@@ -35,12 +37,14 @@ public class UnionFind {
         return root;
     }
 
-    public int FindComponentSize(int cur) {
+    public int FindComponentSize(int cur) 
+    {
         int parent = Find(cur);
         return _size[parent];
     }
 
-    public bool Union(int node1, int node2) {
+    public bool Union(int node1, int node2) 
+    {
         int node1Parent = Find(node1);
         int node2Parent = Find(node2);
 
