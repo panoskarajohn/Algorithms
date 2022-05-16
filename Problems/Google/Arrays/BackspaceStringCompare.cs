@@ -4,7 +4,7 @@ public class BackspaceStringCompare
 {
     /// <summary>
     /// Brute force solution O(n) but space O(n)
-    /// Question specifically asks for O(1)
+    /// Question specifically asks for space O(1)
     /// </summary>
     /// <param name="s"></param>
     /// <param name="t"></param>
