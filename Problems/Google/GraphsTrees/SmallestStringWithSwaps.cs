@@ -8,7 +8,7 @@ public static class SmallestStringWithSwaps
     {
         var dictionary = new Dictionary<int, PriorityQueue<char, char>>();
         
-        var uf = new UnionFindLeet(s.Length);
+        var uf = new UnionFind(s.Length);
 
         foreach (var pair in pairs)
         {

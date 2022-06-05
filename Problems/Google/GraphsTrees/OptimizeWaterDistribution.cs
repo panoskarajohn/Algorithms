@@ -14,7 +14,7 @@ public static class OptimizeWaterDistribution
     /// <returns></returns>
     public static int MinCostToSupplyWater(int n, int[] wells, int[][] pipes)
     {
-        var uf = new UnionFindLeet(n + wells.Length);
+        var uf = new UnionFind(n + wells.Length);
         var edges = new List<(int cost, int u, int v)>();
 
         // Create virtual nodes

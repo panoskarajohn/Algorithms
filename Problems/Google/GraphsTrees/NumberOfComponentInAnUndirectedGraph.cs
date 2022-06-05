@@ -11,6 +11,6 @@ public class NumberOfComponentInAnUndirectedGraph
         {
             uf.Union(edge[0], edge[1]);
         }
-        return uf.NumberOfComponents;
+        return uf.Count;
     }
 }

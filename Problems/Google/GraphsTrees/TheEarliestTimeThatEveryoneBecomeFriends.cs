@@ -13,7 +13,7 @@ public static class TheEarliestTimeThatEveryoneBecomeFriends
         var comparer = Comparer<int>.Default;
         System.Array.Sort(logs, (a, b) => comparer.Compare(a[0], b[0]));
 
-        var uf = new UnionFindLeet(n);
+        var uf = new UnionFind(n);
         int group = n;
 
         foreach (var log in logs)

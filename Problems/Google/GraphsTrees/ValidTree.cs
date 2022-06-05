@@ -16,6 +16,6 @@ public static class ValidTree
             }
         }
 
-        return uf.NumberOfComponents == 1;
+        return uf.Count == 1;
     }
 }

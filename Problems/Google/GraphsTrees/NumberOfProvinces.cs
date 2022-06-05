@@ -20,6 +20,6 @@ public class NumberOfProvinces
             }
         }
         
-        return uf.NumberOfComponents;
+        return uf.Count;
     }
 }
