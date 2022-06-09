@@ -42,6 +42,10 @@ public class DepthFirstSearch
         return visited;
     }
 
+    /// <summary>
+    /// Bidirectional adjacency list
+    /// </summary>
+    /// <param name="edges"></param>
     private void CreateAdjacencyList(int[][] edges)
     {
         foreach (var edge in edges)
