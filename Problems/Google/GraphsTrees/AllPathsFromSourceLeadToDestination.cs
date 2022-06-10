@@ -19,8 +19,7 @@ public class AllPathsFromSourceLeadToDestination
         if (_graph.ContainsKey(destination) && _graph[destination].Count > 0)
             return false;
 
-        var visited = new HashSet<int>();
-        visited.Add(source);
+        var visited = new HashSet<int> {source};
         return Backtrack(source, visited);    
     }
 
@@ -42,9 +41,4 @@ public class AllPathsFromSourceLeadToDestination
 
         return true;
     }
-
-
-
-
-
 }

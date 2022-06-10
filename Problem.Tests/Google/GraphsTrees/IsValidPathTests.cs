@@ -11,7 +11,7 @@ public class IsValidPathTests
     public void Is_Valid_Path_Tests(int n, int[][] edges, int source, int destination, bool expected)
     {
         var validatePath = new ValidatePath();
-        var actual = validatePath.IsValidPath(n, edges, source, destination);
+        var actual = validatePath.IsValidPathUnionFind(n, edges, source, destination);
         actual.Should().Be(expected);
     }
     
@@ -20,6 +20,14 @@ public class IsValidPathTests
     {
         var validatePath = new ValidatePath();
         var actual = validatePath.IsValidPathDfs(n, edges, source, destination);
+        actual.Should().Be(expected);
+    }
+    
+    [Theory, MemberData(nameof(TestDataProperty))]
+    public void Is_Valid_Path_Tests_Bfs(int n, int[][] edges, int source, int destination, bool expected)
+    {
+        var validatePath = new ValidatePath();
+        var actual = validatePath.IsValidPathBfs(n, edges, source, destination);
         actual.Should().Be(expected);
     }
 
