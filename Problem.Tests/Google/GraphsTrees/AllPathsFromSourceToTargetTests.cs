@@ -14,6 +14,13 @@ public class AllPathsFromSourceToTargetTests
         actual.Should().BeEquivalentTo(expected);
     }
     
+    [Theory, MemberData(nameof(TestDataProperty))]
+    public void All_Paths_from_Source_To_Target_Tests_Bfs(int[][] edges, IList<IList<int>> expected)
+    {
+        var actual = new AllPathsFromSourceToTarget().GetAllPaths2(edges);
+        actual.Should().BeEquivalentTo(expected);
+    }
+    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
