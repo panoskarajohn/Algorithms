@@ -7,9 +7,9 @@ public static class LicenseKeyFormatting
     public static string Execute(string s, int k)
     {
         var sb = new StringBuilder();
-        int n = s.Length;
-        int count = 0;
-        int i = n - 1;
+        var n = s.Length;
+        var count = 0;
+        var i = n - 1;
         while (i >= 0)
         {
             var current = char.ToUpper(s[i]);
@@ -17,7 +17,7 @@ public static class LicenseKeyFormatting
             if (current == '-')
             {
                 i--;
-            } 
+            }
             else if (count == k)
             {
                 sb.Insert(0, '-');
@@ -30,7 +30,7 @@ public static class LicenseKeyFormatting
                 i--;
             }
         }
-        
+
         return sb.ToString();
     }
 }

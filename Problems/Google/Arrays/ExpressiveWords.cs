@@ -4,20 +4,19 @@ public static class ExpressiveWords
 {
     public static int Get(string s, string[] words)
     {
-        int counter = 0;
+        var counter = 0;
         foreach (var word in words)
-        {
-            if (Expressive(s, word,0, 0)) 
+            if (Expressive(s, word, 0, 0))
                 counter++;
-        }
 
         return counter;
     }
 
-    private static bool Expressive(string s, string t, int si, int ti){
+    private static bool Expressive(string s, string t, int si, int ti)
+    {
         if (si == s.Length && ti == t.Length) return true;
 
-        if (si == s.Length || ti == t.Length || (s[si] != t[ti])) return false;
+        if (si == s.Length || ti == t.Length || s[si] != t[ti]) return false;
 
         var cur = s[si];
 
@@ -35,6 +34,6 @@ public static class ExpressiveWords
             ti++;
         }
 
-        return (scount == tcount || scount >= 3 && scount > tcount) && Expressive(s, t, si, ti);
+        return (scount == tcount || (scount >= 3 && scount > tcount)) && Expressive(s, t, si, ti);
     }
 }

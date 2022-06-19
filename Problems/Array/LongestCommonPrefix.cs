@@ -8,46 +8,44 @@ public static class LongestCommonPrefix
     {
         if (strs.Length == 1)
             return strs[0];
-        
-        string prev = string.Empty;
-        
-        for (int i = 0; i < strs.Length - 1; i++)
+
+        var prev = string.Empty;
+
+        for (var i = 0; i < strs.Length - 1; i++)
         {
             var commonSubstring = FindCommonSubstring(strs[i], strs[i + 1]);
-            
+
             if (string.IsNullOrEmpty(commonSubstring))
                 return string.Empty;
 
             if (prev == string.Empty)
+            {
                 prev = commonSubstring;
+            }
             else
             {
                 var prevCommon = FindCommonSubstring(commonSubstring, prev);
                 if (string.IsNullOrEmpty(prevCommon))
                     return string.Empty;
-                
+
                 prev = prevCommon;
-                
             }
         }
 
         return prev;
     }
 
-    static string FindCommonSubstring(string word1, string word2)
+    private static string FindCommonSubstring(string word1, string word2)
     {
         var sb = new StringBuilder();
         var n = word1.Length > word2.Length ? word2.Length : word1.Length; // take the shortest
 
-        for (int i = 0; i < n; i++)
-        {
+        for (var i = 0; i < n; i++)
             if (word1[i] == word2[i])
                 sb.Append(word1[i]);
             else
                 break;
-        }
 
         return sb.ToString();
-
     }
 }

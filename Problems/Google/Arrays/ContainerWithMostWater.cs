@@ -4,16 +4,17 @@ public static class ContainerWithMostWater
 {
     public static int MaxArea(int[] height)
     {
-        int left = 0;
-        int right = height.Length - 1;
-        int result = 0;
+        var left = 0;
+        var right = height.Length - 1;
+        var result = 0;
 
-        while (right > left) 
+        while (right > left)
         {
             var distance = right - left;
-            var minHeight = 
-                height[right] < height[left] 
-                    ? height[right] : height[left];
+            var minHeight =
+                height[right] < height[left]
+                    ? height[right]
+                    : height[left];
             var area = distance * minHeight;
 
             if (height[left] < height[right])
@@ -23,9 +24,7 @@ public static class ContainerWithMostWater
 
             result = result > area ? result : area;
         }
-        
+
         return result;
     }
-
-    
 }

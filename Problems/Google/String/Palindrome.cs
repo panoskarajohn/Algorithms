@@ -5,7 +5,7 @@ namespace Problems.Google.String;
 public static class Palindrome
 {
     /// <summary>
-    /// Checks whether a word is a Palindrome
+    ///     Checks whether a word is a Palindrome
     /// </summary>
     /// <remarks>Will remove whitespace and convert to lowercase</remarks>
     /// <param name="word"></param>
@@ -18,15 +18,17 @@ public static class Palindrome
     }
 
     /// <summary>
-    /// Remove whitespace and convert to lower invariant
+    ///     Remove whitespace and convert to lower invariant
     /// </summary>
     /// <param name="word"></param>
     /// <returns></returns>
-    private static string TypifyString(string word) 
-        => Regex.Replace(word.ToLowerInvariant(), @"\s+", "");
+    private static string TypifyString(string word)
+    {
+        return Regex.Replace(word.ToLowerInvariant(), @"\s+", "");
+    }
 
     /// <summary>
-    /// Reverses a given string
+    ///     Reverses a given string
     /// </summary>
     /// <param name="word"></param>
     /// <returns></returns>
@@ -34,7 +36,6 @@ public static class Palindrome
     {
         var wordArray = word.ToCharArray();
         System.Array.Reverse(wordArray);
-        return new(wordArray);
+        return new string(wordArray);
     }
-
 }

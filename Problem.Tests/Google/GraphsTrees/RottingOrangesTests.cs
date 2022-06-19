@@ -1,18 +1,10 @@
 ﻿using System.Collections.Generic;
 using Problems.Google.GraphsTrees;
-using Xunit;
 
 namespace Problem.Tests.Google.GraphsTrees;
 
 public class RottingOrangesTests
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Rotting_Oranges_Tests(int[][] data, int expected)
-    {
-        var result = new RottingOranges().OrangesRotting(data);
-        Assert.Equal(expected, result);
-    }
-    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -53,8 +45,16 @@ public class RottingOrangesTests
                 {
                     new[] {new[] {2, 1, 1}, new[] {1, 1, 1}, new[] {0, 1, 2}},
                     2
-                },
+                }
             };
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Rotting_Oranges_Tests(int[][] data, int expected)
+    {
+        var result = new RottingOranges().OrangesRotting(data);
+        Assert.Equal(expected, result);
     }
 }

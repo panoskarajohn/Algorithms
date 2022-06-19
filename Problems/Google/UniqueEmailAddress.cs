@@ -18,7 +18,7 @@ public static class UniqueEmailAddress
             var cleanedEmail = string.Join('@', localName, domain);
             uniqueEmails.Add(cleanedEmail);
         }
-        
+
         return uniqueEmails.Count;
     }
 
@@ -28,15 +28,15 @@ public static class UniqueEmailAddress
 
         foreach (var c in input)
         {
-            if(c == '.')
+            if (c == '.')
                 continue;
             if (c == '+')
                 break;
 
             sb.Append(c);
         }
-        
-        
+
+
         return sb.ToString();
     }
 }

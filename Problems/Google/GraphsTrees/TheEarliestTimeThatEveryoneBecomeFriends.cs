@@ -8,13 +8,13 @@ public static class TheEarliestTimeThatEveryoneBecomeFriends
     {
         if (logs is null || logs.Length == 0)
             return -1;
-        
+
         // Sort the logs by timestamp
         var comparer = Comparer<int>.Default;
         System.Array.Sort(logs, (a, b) => comparer.Compare(a[0], b[0]));
 
         var uf = new UnionFind(n);
-        int group = n;
+        var group = n;
 
         foreach (var log in logs)
         {
@@ -24,8 +24,7 @@ public static class TheEarliestTimeThatEveryoneBecomeFriends
             if (group == 1)
                 return log[0];
         }
-        
+
         return -1;
     }
-    
 }

@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Problems.Google.String;
-using Xunit;
 
 namespace Problem.Tests.Google.String;
 
@@ -20,7 +19,7 @@ public class PalindromeTests
         var palindromeResult = Palindrome.IsPalindrome(word);
         palindromeResult.Should().BeTrue();
     }
-    
+
     [Theory]
     [InlineData("annan")]
     [InlineData("an nan")]
@@ -35,6 +34,4 @@ public class PalindromeTests
         var palindromeResult = Palindrome.IsPalindrome(word);
         palindromeResult.Should().BeFalse();
     }
-    
-    
 }

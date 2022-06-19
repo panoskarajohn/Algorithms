@@ -1,19 +1,11 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
 using Problems.Google.GraphsTrees;
-using Xunit;
 
 namespace Problem.Tests.Google.GraphsTrees;
 
 public class OptimizeWaterDistributionTests
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Optimize_Water_Distribution_Tests(int n, int[] wells, int[][] pipes, int expected)
-    {
-        var result = OptimizeWaterDistribution.MinCostToSupplyWater(n, wells, pipes);
-        result.Should().Be(expected);
-    }
-
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -43,5 +35,13 @@ public class OptimizeWaterDistributionTests
                 }
             };
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Optimize_Water_Distribution_Tests(int n, int[] wells, int[][] pipes, int expected)
+    {
+        var result = OptimizeWaterDistribution.MinCostToSupplyWater(n, wells, pipes);
+        result.Should().Be(expected);
     }
 }

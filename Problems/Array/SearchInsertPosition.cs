@@ -9,10 +9,9 @@ public class SearchInsertPosition
         return BinarySearch(nums, 0, nums.Length - 1, target);
     }
 
-    
 
     /// <summary>
-    /// A custom made Binary search which returns the index between
+    ///     A custom made Binary search which returns the index between
     /// </summary>
     /// <param name="nums"></param>
     /// <param name="start"></param>
@@ -22,8 +21,8 @@ public class SearchInsertPosition
     private static int BinarySearch(int[] nums, int start, int end, int target)
     {
         if (start > end) return 0;
-        
-        int mid = (end + start) / 2;
+
+        var mid = (end + start) / 2;
 
         if (nums[mid] == target)
             return mid;
@@ -35,7 +34,7 @@ public class SearchInsertPosition
             return nums.Length;
 
         if (nums[mid] > target) return BinarySearch(nums, start, mid - 1, target);
-        
+
         return BinarySearch(nums, mid + 1, end, target);
     }
 }

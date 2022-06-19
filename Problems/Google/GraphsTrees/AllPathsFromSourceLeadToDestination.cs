@@ -2,10 +2,10 @@
 
 public class AllPathsFromSourceLeadToDestination
 {
-    private Dictionary<int, HashSet<int>> _graph = new Dictionary<int, HashSet<int>>();
+    private readonly Dictionary<int, HashSet<int>> _graph = new();
 
     private int _target;
-    
+
     public bool AllLeadsToDestination(int n, int[][] edges, int source, int destination)
     {
         _target = destination;
@@ -15,12 +15,12 @@ public class AllPathsFromSourceLeadToDestination
                 _graph[edge[0]] = new HashSet<int>();
             _graph[edge[0]].Add(edge[1]);
         }
-        
+
         if (_graph.ContainsKey(destination) && _graph[destination].Count > 0)
             return false;
 
         var visited = new HashSet<int> {source};
-        return Backtrack(source, visited);    
+        return Backtrack(source, visited);
     }
 
     private bool Backtrack(int currentNode, HashSet<int> visited)

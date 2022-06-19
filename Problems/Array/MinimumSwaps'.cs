@@ -3,7 +3,7 @@
 public static class MinimumSwaps
 {
     /// <summary>
-    /// Returns minimum swaps that need to happen in order to sort an array.
+    ///     Returns minimum swaps that need to happen in order to sort an array.
     /// </summary>
     /// <remarks>Not optimal solution.</remarks>
     /// <param name="array"></param>
@@ -11,10 +11,10 @@ public static class MinimumSwaps
     public static int Get(int[] array)
     {
         var n = array.Length;
-        int swaps = 0;
-        int i = 0;
+        var swaps = 0;
+        var i = 0;
 
-        while(i < n)
+        while (i < n)
         {
             if (i + 1 >= n)
                 break; // we are on the last element
@@ -24,7 +24,7 @@ public static class MinimumSwaps
 
             if (current > next)
             {
-                (int index1, int index2, int indexToStart) = FindIndexToSwap(array, i);
+                (var index1, var index2, var indexToStart) = FindIndexToSwap(array, i);
                 (array[index1], array[index2]) = (array[index2], array[index1]);
                 swaps++;
                 i = indexToStart - 1; // due to incrementing it later
@@ -32,28 +32,24 @@ public static class MinimumSwaps
 
             i++; // increment i
         }
+
         return swaps;
     }
 
-    static (int index1, int index2, int startingIndex) FindIndexToSwap(int[] array, int currentIndex)
+    private static (int index1, int index2, int startingIndex) FindIndexToSwap(int[] array, int currentIndex)
     {
-        
         var current = array[currentIndex]; // we are sure that current is larger that next
         var next = array[currentIndex + 1];
 
         if (currentIndex == 0)
             return (currentIndex, 1, 0);
-        
-        for (int i = 0; i < currentIndex; i++)
-        {
-            if (next <= array[i])
-            {
-                return (i, currentIndex + 1, currentIndex - 1);
-            }
-        }
 
-        int n = array.Length;
-        for (int i = currentIndex + 2; i < n; i++) // this means we need to swap with the larger number
+        for (var i = 0; i < currentIndex; i++)
+            if (next <= array[i])
+                return (i, currentIndex + 1, currentIndex - 1);
+
+        var n = array.Length;
+        for (var i = currentIndex + 2; i < n; i++) // this means we need to swap with the larger number
         {
             if (i + 1 >= n)
                 return (currentIndex, currentIndex + 1, n - 2);
@@ -62,14 +58,11 @@ public static class MinimumSwaps
             {
                 if (next < array[i])
                     return (currentIndex, currentIndex + 1, currentIndex);
-                
+
                 return (currentIndex, i, currentIndex);
             }
         }
 
         return (currentIndex, currentIndex + 1, 0);
     }
-
-
-
 }

@@ -4,7 +4,7 @@ public static class MergeTwoLists
 {
     public static ListNode Merge(ListNode list1, ListNode list2)
     {
-        ListNode dummy = new ListNode(-1,null);
+        var dummy = new ListNode(-1);
         var dummyReturn = dummy;
         while (list1 != null || list2 != null)
         {
@@ -13,12 +13,12 @@ public static class MergeTwoLists
 
             if (value1 < value2)
             {
-                dummy.next = new ListNode(value1, null);
+                dummy.next = new ListNode(value1);
                 list1 = list1.next;
             }
             else
             {
-                dummy.next = new ListNode(value2, null);
+                dummy.next = new ListNode(value2);
                 list2 = list2.next;
             }
 
@@ -26,7 +26,5 @@ public static class MergeTwoLists
         }
 
         return dummyReturn.next;
-
-
     }
 }

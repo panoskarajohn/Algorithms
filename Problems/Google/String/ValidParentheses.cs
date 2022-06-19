@@ -2,26 +2,26 @@
 
 public class ValidParentheses
 {
-    private readonly Dictionary<char, char> reverse = new Dictionary<char, char>()
+    private readonly Dictionary<char, char> reverse = new()
     {
         {'(', ')'},
         {'[', ']'},
-        {'{', '}'},
+        {'{', '}'}
     };
-    
+
     public bool IsValid(string s)
     {
         var stack = new Stack<char>();
-        
-        for (int i = 0; i < s.Length; i++)
+
+        for (var i = 0; i < s.Length; i++)
         {
             var current = s[i];
-            
+
             if (!stack.Any())
             {
                 if (!reverse.ContainsKey(current))
                     return false;
-                
+
                 stack.Push(current);
             }
             else
@@ -42,6 +42,4 @@ public class ValidParentheses
 
         return !stack.Any();
     }
-    
-    
 }

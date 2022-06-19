@@ -4,9 +4,9 @@ public class FindKthLargestElement
 {
     public static int Find(int[] nums, int k)
     {
-        PriorityQueue<int, int> heap = new PriorityQueue<int, int>();
+        var heap = new PriorityQueue<int, int>();
 
-        for (int i = 0; i < nums.Length; i++)
+        for (var i = 0; i < nums.Length; i++)
         {
             heap.Enqueue(nums[i], nums[i]);
             if (heap.Count > k)
@@ -14,6 +14,5 @@ public class FindKthLargestElement
         }
 
         return heap.Dequeue();
-
     }
 }

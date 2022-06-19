@@ -2,12 +2,13 @@
 
 public class AllPathsFromSourceToTarget
 {
-    private int _target;
     /// <summary>
-    /// This is already an adjacency list. Every index is already a node.
+    ///     This is already an adjacency list. Every index is already a node.
     /// </summary>
     private int[][] _graph;
+
     private List<IList<int>> _results;
+    private int _target;
 
     public IList<IList<int>> GetAllPaths(int[][] graph)
     {
@@ -15,12 +16,12 @@ public class AllPathsFromSourceToTarget
         _target = _graph.Length - 1;
         _results = new List<IList<int>>();
         //Adopt the LinkedList for fast access to the tail element
-        LinkedList<int> path = new LinkedList<int>();
+        var path = new LinkedList<int>();
         path.AddLast(0);
         Backtrack(0, path);
         return _results;
     }
-    
+
     private void Backtrack(int currentNode, LinkedList<int> path)
     {
         if (currentNode == _target)
@@ -36,16 +37,16 @@ public class AllPathsFromSourceToTarget
             path.RemoveLast();
         }
     }
-    
+
     public IList<IList<int>> GetAllPaths2(int[][] graph)
     {
         _graph = graph;
         _target = _graph.Length - 1;
         _results = new List<IList<int>>();
-        
-        
-        LinkedList<int> path = new LinkedList<int>();
-        
+
+
+        var path = new LinkedList<int>();
+
         var queue = new Queue<LinkedList<int>>();
         path.AddLast(0);
         queue.Enqueue(path);
@@ -53,21 +54,18 @@ public class AllPathsFromSourceToTarget
         while (queue.Any())
         {
             var currentPath = queue.Dequeue();
-            int node = currentPath.Last.Value;
-            foreach (int neighbor in _graph[node])
+            var node = currentPath.Last.Value;
+            foreach (var neighbor in _graph[node])
             {
-                LinkedList<int> tmpPath = new LinkedList<int>(currentPath);
+                var tmpPath = new LinkedList<int>(currentPath);
                 tmpPath.AddLast(neighbor);
                 if (neighbor == _target)
-                {
                     _results.Add(new List<int>(tmpPath));
-                }
                 else
-                {
                     queue.Enqueue(new LinkedList<int>(tmpPath));
-                }
             }
         }
+
         return _results;
     }
 }

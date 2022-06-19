@@ -5,7 +5,7 @@ namespace Problems.Google.GraphsTrees;
 public class ValidatePath
 {
     /// <summary>
-    /// Union find solution
+    ///     Union find solution
     /// </summary>
     /// <param name="n"></param>
     /// <param name="edges"></param>
@@ -17,16 +17,12 @@ public class ValidatePath
         if (source == destination) return true;
         var unionFind = new UnionFind(n);
 
-        foreach (var edge in edges)
-        {
-            unionFind.Union(edge[0], edge[1]);
-        }
-        
+        foreach (var edge in edges) unionFind.Union(edge[0], edge[1]);
+
         return unionFind.Find(source) == unionFind.Find(destination);
     }
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="n"></param>
     /// <param name="edges"></param>
@@ -39,9 +35,8 @@ public class ValidatePath
         var dfs = new DepthFirstSearch(edges);
         return dfs.Dfs(source).Contains(destination);
     }
-    
+
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="n"></param>
     /// <param name="edges"></param>

@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Problems.Google.Arrays;
-using Xunit;
 
 namespace Problem.Tests.Google.Arrays;
 
@@ -15,7 +14,7 @@ public class LongestSubstringTests
         var result = LongestSubstring.LengthOfLongestSubstringBruteForce(s);
         result.Should().Be(expected);
     }
-    
+
     [Theory]
     [InlineData("abcabcbb", 3)]
     [InlineData("bbbbb", 1)]

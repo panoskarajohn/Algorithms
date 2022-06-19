@@ -7,10 +7,10 @@ public class ClosestPointsToOrigin
         //TElement is the point, and the priority is the distance
         var heap = new PriorityQueue<int[], double>();
         var returnArray = new int[k][];
-        int x2 = 0;
-        int y2 = 0;
+        var x2 = 0;
+        var y2 = 0;
 
-        for (int i = 0; i < points.Length; i++)
+        for (var i = 0; i < points.Length; i++)
         {
             var x1 = points[i][0];
             var y1 = points[i][1];

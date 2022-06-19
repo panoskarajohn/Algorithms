@@ -7,7 +7,7 @@ public static class LengthOfLastWord
         var trimmed = sentence.TrimEnd();
 
         var split = trimmed.Split(" ");
-        
+
         return split.Last().Length;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Problems.Google.Arrays;
-using Xunit;
 
 namespace Problem.Tests.Google.Arrays;
 
@@ -15,7 +14,7 @@ public class BackspaceStringCompareTests
         var result = BackspaceStringCompare.Compare(s, t);
         result.Should().Be(expected);
     }
-    
+
     [Theory]
     [InlineData("ab#c", "ad#c", true)]
     [InlineData("ab##", "c#d#", true)]

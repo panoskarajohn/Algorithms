@@ -3,16 +3,14 @@
 public class ReconstructItinerary
 {
     /// <summary>
-    /// The graph
+    ///     The graph
     /// </summary>
-    private Dictionary<string, List<string>> _flightMap =
-        new Dictionary<string, List<string>>();
+    private readonly Dictionary<string, List<string>> _flightMap = new();
 
-    private Dictionary<string, bool[]> _visitedMap = new Dictionary<string, bool[]>();
+    private int _flights;
+    private List<string> _result = new();
 
-    private int _flights = 0;
-    private List<string> _result = new List<string>();
-    
+    private readonly Dictionary<string, bool[]> _visitedMap = new();
 
 
     public IList<string> FindItinerary(IList<IList<string>> tickets)
@@ -24,30 +22,26 @@ public class ReconstructItinerary
             var flightTo = ticket[1];
 
             if (_flightMap.ContainsKey(flightFrom))
-            {
                 _flightMap[flightFrom].Add(flightTo);
-            }
             else
-            {
                 _flightMap[flightFrom] = new List<string> {flightTo};
-            }
         }
-        
+
         // sort the destinations and init the visited map
         foreach (var _flight in _flightMap)
         {
             _flight.Value.Sort();
             _visitedMap[_flight.Key] = new bool[_flight.Value.Count];
         }
-        
+
         // start from JFK
         _flights = tickets.Count;
-        LinkedList<string> routes = new LinkedList<string>();
+        var routes = new LinkedList<string>();
         routes.AddLast("JFK");
-        
+
         // start the DFS
         Backtracking("JFK", routes);
-        
+
         return _result;
     }
 
@@ -62,8 +56,8 @@ public class ReconstructItinerary
         if (!_flightMap.ContainsKey(origin))
             return false;
 
-        int index = 0;
-        bool[] bitmap = _visitedMap[origin];
+        var index = 0;
+        var bitmap = _visitedMap[origin];
 
         foreach (var destination in _flightMap[origin])
         {
@@ -71,14 +65,13 @@ public class ReconstructItinerary
             {
                 bitmap[index] = true;
                 routes.AddLast(destination);
-                bool ret = Backtracking(destination, routes);
-                
+                var ret = Backtracking(destination, routes);
+
                 routes.RemoveLast();
                 bitmap[index] = false;
-                
+
                 if (ret)
                     return true;
-                
             }
 
             index++;

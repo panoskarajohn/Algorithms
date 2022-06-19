@@ -9,12 +9,8 @@ public static class ValidTree
         var uf = new UnionFind(n);
 
         foreach (var edge in edges)
-        {
             if (!uf.Union(edge[0], edge[1]))
-            {
                 return false;
-            }
-        }
 
         return uf.Count == 1;
     }

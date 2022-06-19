@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Problems.Array;
-using Xunit;
 
 namespace Problem.Tests.Array;
 

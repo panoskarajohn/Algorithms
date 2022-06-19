@@ -1,22 +1,16 @@
-﻿using System.ComponentModel;
-
-namespace Problems.Google.LinkedList;
+﻿namespace Problems.Google.LinkedList;
 
 public class RemoveNthNodeFromEnd
 {
-    
     public static ListNode Remove(ListNode head, int n)
     {
-        var dummy = new ListNode(0);
+        var dummy = new ListNode();
         dummy.next = head;
 
-        ListNode slow = dummy;
-        ListNode fast = dummy;
+        var slow = dummy;
+        var fast = dummy;
 
-        for (int i = 0; i <= n; i++)
-        {
-            fast = fast.next;
-        }
+        for (var i = 0; i <= n; i++) fast = fast.next;
 
         while (fast != null)
         {

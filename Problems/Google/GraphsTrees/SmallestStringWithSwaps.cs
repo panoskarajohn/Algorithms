@@ -7,17 +7,14 @@ public static class SmallestStringWithSwaps
     public static string Get(string s, IList<IList<int>> pairs)
     {
         var dictionary = new Dictionary<int, PriorityQueue<char, char>>();
-        
+
         var uf = new UnionFind(s.Length);
 
-        foreach (var pair in pairs)
-        {
-            uf.Union(pair[0], pair[1]);
-        }
+        foreach (var pair in pairs) uf.Union(pair[0], pair[1]);
 
-        for (int i = 0; i < s.Length; i++)
+        for (var i = 0; i < s.Length; i++)
         {
-            int parentId = uf.Find(i);
+            var parentId = uf.Find(i);
             if (dictionary.ContainsKey(parentId))
             {
                 dictionary[parentId].Enqueue(s[i], s[i]);
@@ -32,12 +29,12 @@ public static class SmallestStringWithSwaps
 
         Span<char> charArray = stackalloc char[s.Length];
 
-        for (int i = 0; i < s.Length; i++)
+        for (var i = 0; i < s.Length; i++)
         {
-            int parentId = uf.Find(i);
+            var parentId = uf.Find(i);
             charArray[i] = dictionary[parentId].Dequeue();
         }
-        
+
         return new string(charArray);
     }
 }
