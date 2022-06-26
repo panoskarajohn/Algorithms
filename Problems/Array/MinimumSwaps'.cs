@@ -24,7 +24,7 @@ public static class MinimumSwaps
 
             if (current > next)
             {
-                (var index1, var index2, var indexToStart) = FindIndexToSwap(array, i);
+                var (index1, index2, indexToStart) = FindIndexToSwap(array, i);
                 (array[index1], array[index2]) = (array[index2], array[index1]);
                 swaps++;
                 i = indexToStart - 1; // due to incrementing it later

@@ -7,10 +7,10 @@ public class ReconstructItinerary
     /// </summary>
     private readonly Dictionary<string, List<string>> _flightMap = new();
 
+    private readonly Dictionary<string, bool[]> _visitedMap = new();
+
     private int _flights;
     private List<string> _result = new();
-
-    private readonly Dictionary<string, bool[]> _visitedMap = new();
 
 
     public IList<string> FindItinerary(IList<IList<string>> tickets)

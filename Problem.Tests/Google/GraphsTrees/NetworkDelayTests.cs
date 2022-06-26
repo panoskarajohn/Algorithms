@@ -5,14 +5,6 @@ namespace Problem.Tests.Google.GraphsTrees;
 
 public class NetworkDelayTests
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Network_Delay_Dijkstra_Tests(int[][] data, int n, int k, int expected)
-    {
-        var networkDelay = new NetworkDelay();
-        var result = networkDelay.NetworkDelayTime(data, n, k);
-        Assert.Equal(expected, result);
-    }
-    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -42,5 +34,14 @@ public class NetworkDelayTests
                 }
             };
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Network_Delay_Dijkstra_Tests(int[][] data, int n, int k, int expected)
+    {
+        var networkDelay = new NetworkDelay();
+        var result = networkDelay.NetworkDelayTime(data, n, k);
+        Assert.Equal(expected, result);
     }
 }
