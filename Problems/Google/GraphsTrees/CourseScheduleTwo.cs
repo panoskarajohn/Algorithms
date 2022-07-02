@@ -20,7 +20,7 @@ public class CourseScheduleTwo
         if (numCourses == 0) 
             return System.Array.Empty<int>();
 
-        //meaning there are not pre requisites we are free to take in whatever order we like
+        //there are not any pre requisites we are free to take in whatever order we like
         if (prerequisites is null || prerequisites.Length == 0)
         {
             for (int i = 0; i < numCourses; i++)
