@@ -58,5 +58,49 @@ public class LongestIncreasingPath
     }
 
     #endregion
+
+    #region Dfs Memoization
+
+    public int GetDfsMemoization(int[][] matrix)
+    {
+        if (matrix is null || matrix.Length == 0)
+            return 0;
+        int maxPath = 0;
+        int[,] cache = new int[matrix.Length,matrix[0].Length];
+
+        for (int row = 0; row < matrix.Length; row++)
+        {
+            for (int col = 0; col < matrix[row].Length; col++ )
+            {
+                maxPath = Math.Max(maxPath, Dfs(matrix, row, col, cache));
+            }
+        }
+        
+        return maxPath;
+    }
     
+    int Dfs(int[][] matrix ,int row, int col, int[,] cache)
+    {
+        if (cache[row, col] != 0) return cache[row, col];
+        foreach (var direction in _directions)
+        {
+            var directionRow = row + direction[0];
+            var directionCol= col + direction[1];
+            int source = matrix[row][col];
+            
+
+            var isOutOfBounds = directionRow < 0
+                                || directionCol < 0
+                                || directionRow >= matrix.Length
+                                || directionCol >= matrix[row].Length;
+
+            if (!isOutOfBounds && matrix[directionRow][directionCol] > source)
+            {
+                cache[row,col] = Math.Max(cache[row,col], Dfs(matrix, directionRow, directionCol, cache));
+            }
+        }
+
+        return ++cache[row,col];
+    }
+    #endregion
 }

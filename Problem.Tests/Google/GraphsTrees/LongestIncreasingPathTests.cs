@@ -13,6 +13,13 @@ public class LongestIncreasingPathTests
         result.Should().Be(expected);
     }
     
+    [Theory, MemberData(nameof(TestDataProperty))]
+    public void Longest_Increasing_Path_DfsMem_Tests(int[][] data, int expected)
+    {
+        var result = new LongestIncreasingPath().GetDfsMemoization(data);
+        result.Should().Be(expected);
+    }
+    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
