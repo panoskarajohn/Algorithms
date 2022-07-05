@@ -5,7 +5,7 @@ namespace Problems.Google.GraphsTrees;
 public class CheapestFlightsWithinKStops
 {
     private readonly Dictionary<int, List<(int cost, int dest)>> _graph 
-        = new Dictionary<int, List<(int cost, int dest)>>();
+        = new();
 
     /// <summary>
     /// Bellman ford approach
@@ -47,9 +47,6 @@ public class CheapestFlightsWithinKStops
         }
 
         return prices[dst] == int.MaxValue ? -1 : prices[dst];
-
-
-        return -1;
     }
 
     void FillSpan(Span<int> span, int valueToFill = int.MaxValue)
