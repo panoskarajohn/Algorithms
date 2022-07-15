@@ -3,19 +3,28 @@
 public class ClimbingStairs
 {
     private Dictionary<int, int> _cache = new();
-    public int GetDistinctWays(int steps)
-    {
-        
-        if (_cache.ContainsKey(steps))
-            return _cache[steps];
-        
-        if (steps < 2)
-            return 1;
 
-        var oneStep = GetDistinctWays(steps - 1); 
-        var twoStep =  GetDistinctWays(steps - 2);
+    public int Climb(int n)
+    {
+        return GetDistinctWays(0, n);
+    }
+    
+    int GetDistinctWays(int currentStep,int steps)
+    {
+        if (currentStep == steps)
+            return 1;
+        
+        if (currentStep > steps)
+            return 0;
+        
+        if (_cache.ContainsKey(currentStep))
+            return _cache[currentStep];
+
+        
+        var oneStep = GetDistinctWays(currentStep + 1, steps); 
+        var twoStep =  GetDistinctWays(currentStep + 2, steps);
         var result = oneStep + twoStep;
-        _cache.Add(steps, result);
+        _cache.Add(currentStep, result);
         return result;
     }
 }

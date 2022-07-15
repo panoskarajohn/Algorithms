@@ -11,7 +11,7 @@ public class ClimbingStairsTests
     [Theory, MemberData(nameof(TestDataProperty))]
     public void Climbing_stairs_Tests(int steps , int expected)
     {
-        var result = new ClimbingStairs().GetDistinctWays(steps);
+        var result = new ClimbingStairs().Climb(steps);
         result.Should().Be(expected);
     }
     
