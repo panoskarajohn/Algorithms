@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Problems.Google.Recursion;
 
@@ -10,7 +11,18 @@ public class WordSquaresTests
     public void Word_squares_tests(string[] words, IList<IList<string>> expected)
     {
         var result = new WordSquares().Get(words);
-        //result.Should().BeEquivalentTo(expected);
+
+        var sortedResult = result
+            .Select(s => s.OrderBy(c => c).ToList())
+            .ToList();
+        
+        var sortedExpected = expected
+            .Select(s => s.OrderBy(c => c).ToList())
+            .ToList();
+
+
+
+        sortedResult.Should().BeEquivalentTo(sortedExpected);
     }
     
     public static IEnumerable<object[]> TestDataProperty
