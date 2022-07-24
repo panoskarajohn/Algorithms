@@ -2,8 +2,6 @@
 
 public class StrobogrammaticNumber
 {
-    
-
     private readonly IReadOnlyDictionary<char, char> _rotates = new Dictionary<char, char>()
     {
         {'0', '0'},

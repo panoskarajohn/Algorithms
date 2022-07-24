@@ -88,6 +88,11 @@ public class StrobogrammaticNumberTests
             {
                 new object[]
                 {
+                    3,
+                    new List<string>{"101", "111", "181", "609", "619", "689", "808", "818", "888", "906", "916", "986"},
+                },
+                new object[]
+                {
                     2,
                     new List<string>{"11", "69", "88", "96"},
                 }, 
