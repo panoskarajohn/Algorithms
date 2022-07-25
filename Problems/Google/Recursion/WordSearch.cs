@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Runtime.InteropServices;
 
 namespace Problems.Google.Recursion;
 
@@ -103,6 +104,122 @@ public class WordSearch
         }
 
         return result;
+    }
+}
 
+public class Trie
+{
+    public Dictionary<char, Trie> Children { get; set; } = new();
+    public string Word { get; set; }
+}
+
+public class WordSearchTwo
+{
+    private int _sizeRow;
+    private int _sizeCol;
+    private char[][] _board;
+    private readonly List<string> _result = new List<string>();
+
+    private readonly int[][] _directions = new int[][]
+    {
+        new int[] { -1, 0 },
+        new int[] { 0, 1 },
+        new int[] { 1, 0 },
+        new int[] { 0, -1 }
+    };
+    
+    public IList<string> FindWords(char[][] board, string[] words)
+    {
+        _sizeRow = board.Length;
+        _sizeCol = board[0].Length;
+        _board = board;
+
+        // Build the trie
+        var root = new Trie();
+        foreach (var word in words)
+        {
+            var node = root;
+            foreach (var character in word)
+            {
+                if (node.Children.ContainsKey(character))
+                {
+                    node = node.Children[character];
+                }
+                else
+                {
+                    var newNode = new Trie();
+                    node.Children.Add(character, newNode);
+                    node = newNode;
+                }
+            }
+
+            node.Word = word;
+        }
+
+        for (int i = 0; i < _sizeRow; i++)
+        {
+            for (int j = 0; j < _sizeCol; j++)
+            {
+                Backtracking(i, j, root);
+            }
+        }
+
+        return _result;
+    }
+
+    private void Backtracking(int row, int col, Trie parent)
+    {
+        var current = _board[row][col];
+        var currentNode = parent.Children.GetValueOrDefault(current);
+
+        if (currentNode is null)
+            return;
+        
+        if (currentNode.Word is not null)
+        {
+            _result.Add(currentNode.Word);
+            currentNode.Word = null;
+        }
+
+        // Mark as visited
+        _board[row][col] = '#';
+
+        foreach (var direction in GetDirections(row, col))
+        {
+            if (currentNode.Children.ContainsKey(_board[direction.row][direction.col]))
+            {
+                Backtracking(direction.row, direction.col, currentNode);
+            }
+        }
+
+        //restore original value
+        _board[row][col] = current;
+        
+        //Optimize: incrementally remove the leaf node
+        if (!currentNode.Children.Any())
+        {
+            parent.Children.Remove(current);
+        }
+    }
+    
+    private List<(int row, int col)> GetDirections(int row, int col)
+    {
+        var result = new List<(int row, int col)>();
+
+        foreach (var direction in _directions)
+        {
+            var newRow = row + direction[0];
+            var newCol = col + direction[1];
+            
+            if(newRow < 0 
+               || newRow >= _sizeRow 
+               || newCol < 0 
+               || newCol >= _sizeCol)
+                continue;
+
+            result.Add((newRow, newCol));
+        }
+
+        return result;
     }
 }

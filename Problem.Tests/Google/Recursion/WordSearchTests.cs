@@ -22,6 +22,13 @@ public class WordSearchTests
         result.Should().BeEquivalentTo(expected);
     }
     
+    [Theory, MemberData(nameof(TestDataTwoProperty))]
+    public void Word_Search_Two_Tests(char[][] board, string[] words, string[] expected)
+    {
+        var result = new WordSearchTwo().FindWords(board, words);
+        result.Should().BeEquivalentTo(expected);
+    }
+    
     public static IEnumerable<object[]> TestDataTwoProperty
     {
         get
