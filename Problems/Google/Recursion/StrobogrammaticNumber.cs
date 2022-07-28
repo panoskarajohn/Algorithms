@@ -2,20 +2,20 @@
 
 public class StrobogrammaticNumber
 {
-    private readonly IReadOnlyDictionary<char, char> _rotates = new Dictionary<char, char>()
+    private readonly IReadOnlyDictionary<char, char> _rotates = new Dictionary<char, char>
     {
         {'0', '0'},
         {'1', '1'},
         {'8', '8'},
         {'6', '9'},
-        {'9', '6'},
+        {'9', '6'}
     };
 
     public bool IsStrobogrammatic(string num)
     {
-        int n = num.Length;
+        var n = num.Length;
 
-        for (int i = 0; i < n; i++)
+        for (var i = 0; i < n; i++)
         {
             var current = num[i];
             var last = num[n - 1 - i];
@@ -30,7 +30,6 @@ public class StrobogrammaticNumber
     }
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="n"></param>
     /// <returns></returns>
@@ -38,20 +37,20 @@ public class StrobogrammaticNumber
     {
         if (n > 14)
             throw new InvalidOperationException("n cannot be more than 14");
-        
-        var power = (long)Math.Pow(10, n - 1);
+
+        var power = (long) Math.Pow(10, n - 1);
 
         if (power % 2 == 1)
             power--;
-        
-        var limit = (long)Math.Pow(10, n);
+
+        var limit = (long) Math.Pow(10, n);
         var result = new List<string>();
 
-        for (long i = power; i < limit; i++)
+        for (var i = power; i < limit; i++)
         {
             var current = i.ToString();
 
-            if(IsStrobogrammatic(current))
+            if (IsStrobogrammatic(current))
                 result.Add(i.ToString());
         }
 
@@ -61,25 +60,24 @@ public class StrobogrammaticNumber
     private List<string> GenerateStroboNumbers(int n, int finalLength)
     {
         if (n == 0)
-            return new List<string>() {""};
+            return new List<string> {""};
 
         if (n == 1)
-            return new List<string>() {"0", "1", "8"};
+            return new List<string> {"0", "1", "8"};
 
         var previousStroboNums = GenerateStroboNumbers(n - 2, finalLength);
         var current = new List<string>();
 
         foreach (var prev in previousStroboNums)
-        {
-            foreach (var rotate in _rotates)
-            {
-                if(rotate.Key != '0' || n != finalLength)
-                    current.Add(rotate.Key + prev + rotate.Value);
-            }
-        }
+        foreach (var rotate in _rotates)
+            if (rotate.Key != '0' || n != finalLength)
+                current.Add(rotate.Key + prev + rotate.Value);
 
         return current;
     }
 
-    public List<string> FindStrobogrammatic(int n) => GenerateStroboNumbers(n, n);
+    public List<string> FindStrobogrammatic(int n)
+    {
+        return GenerateStroboNumbers(n, n);
+    }
 }

@@ -4,6 +4,8 @@ namespace Problems.Google.GraphsTrees;
 
 public class CrackSafe
 {
+    private StringBuilder _answer;
+
     /*
      * The solution that was showcased was with Euler's path
      * This problem needs to be revisited
@@ -15,10 +17,10 @@ public class CrackSafe
      * (path starting where it ends.) We should visit each node in "post-order" so as to not get stuck in the graph prematurely.
      */
     private HashSet<string> _seen;
-    private StringBuilder _answer;
+
     /// <summary>
-    /// There is a safe protected by a password.
-    /// The password is a sequence of n digits where each digit can be in the range [0, k - 1].
+    ///     There is a safe protected by a password.
+    ///     The password is a sequence of n digits where each digit can be in the range [0, k - 1].
     /// </summary>
     /// <param name="n"></param>
     /// <param name="k"></param>
@@ -33,21 +35,21 @@ public class CrackSafe
 
         var sb = new StringBuilder();
 
-        for (int i = 0; i < n - 1; i++)
+        for (var i = 0; i < n - 1; i++)
             sb.Append("0");
 
         var start = sb.ToString();
-        
-        Dfs(start,k);
+
+        Dfs(start, k);
 
         _answer.Append(start);
 
         return _answer.ToString();
     }
-    
-    void Dfs(string node, int k)
+
+    private void Dfs(string node, int k)
     {
-        for (int i = 0; i < k; i++)
+        for (var i = 0; i < k; i++)
         {
             var current = node + i;
             if (!_seen.Contains(current))

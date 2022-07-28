@@ -19,8 +19,8 @@ public class BestTimeToBuyAndSellStockTests
                 },
                 new object[]
                 {
-                    new[] { 7,6,4,3,1 },
-                    5
+                    new[] {7, 6, 4, 3, 1},
+                    0
                 }
             };
         }

@@ -33,7 +33,7 @@ public class CoinChangeTests
             };
         }
     }
-    
+
     public static IEnumerable<object[]> TestDataTwoProperty
     {
         get
@@ -69,7 +69,7 @@ public class CoinChangeTests
         var result = new CoinChange().Get(coins, amount);
         result.Should().Be(expected);
     }
-    
+
     [Theory]
     [MemberData(nameof(TestDataTwoProperty))]
     public void Coin_Change_Two_Tests(int[] coins, int amount, int expected)

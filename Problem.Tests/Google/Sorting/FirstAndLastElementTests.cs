@@ -14,13 +14,13 @@ public class FirstAndLastElementTests
             {
                 new object[]
                 {
-                    new int[]{5, 7, 7, 8, 8, 10},
+                    new[] {5, 7, 7, 8, 8, 10},
                     8,
                     new[] {3, 4}
                 },
                 new object[]
                 {
-                    new int[]{5, 7, 7, 8, 8, 10},
+                    new[] {5, 7, 7, 8, 8, 10},
                     6,
                     new[] {-1, -1}
                 },

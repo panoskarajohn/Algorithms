@@ -1,19 +1,18 @@
-﻿using System.Collections;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Text;
 
 namespace Problems.Google.Recursion;
 
 public class GenerateParentheses
 {
-    private IReadOnlyDictionary<char, char> _reverse = new Dictionary<char, char>()
+    private readonly List<string> _combinations = new();
+
+    private readonly IReadOnlyDictionary<char, char> _reverse = new Dictionary<char, char>
     {
         {'(', ')'}
     };
 
-    private int _size = 0;
-    private List<string> _combinations = new();
-    
+    private int _size;
+
     public IList<string> Get(int n)
     {
         _size = n * 2;
@@ -25,14 +24,11 @@ public class GenerateParentheses
     {
         if (path.Length == _size)
         {
-            if (IsValidParentheses(path.ToString()))
-            {
-                _combinations.Add(path.ToString());
-            }
+            if (IsValidParentheses(path.ToString())) _combinations.Add(path.ToString());
             return;
         }
 
-        var combinations = new char[] {'(', ')'};
+        var combinations = new[] {'(', ')'};
         foreach (var combination in combinations)
         {
             path.Append(combination);
@@ -40,17 +36,18 @@ public class GenerateParentheses
             path.Remove(path.Length - 1, 1);
         }
     }
+
     private bool IsValidParentheses(string parentheses)
     {
         var stack = new Stack<char>();
-        for (int i = 0; i < parentheses.Length; i++)
+        for (var i = 0; i < parentheses.Length; i++)
         {
             var current = parentheses[i];
             if (!stack.Any())
             {
                 if (!_reverse.ContainsKey(current))
                     return false;
-                
+
                 stack.Push(current);
                 continue;
             }

@@ -1,10 +1,9 @@
-﻿using System.Text;
-
-namespace Problems.Google.GraphsTrees;
+﻿namespace Problems.Google.GraphsTrees;
 
 public class WordLadder
 {
     private Dictionary<char, Dictionary<char, int>> _graph = new();
+
     public int LadderLength(string beginWord, string endWord, IList<string> wordList)
     {
         if (!wordList.Contains(endWord))
@@ -15,43 +14,42 @@ public class WordLadder
         words.Remove(beginWord);
         queue.Enqueue(beginWord);
 
-        int level = 0;
+        var level = 0;
 
         while (queue.Any())
         {
-            int size = queue.Count;
+            var size = queue.Count;
             level++;
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
             {
-                string current = queue.Dequeue();
+                var current = queue.Dequeue();
                 if (current == endWord) return level;
 
-                IList<string> neighbors = GetNeighbors(current);
+                var neighbors = GetNeighbors(current);
                 foreach (var neighbor in neighbors)
-                {
                     if (words.Contains(neighbor))
                     {
                         words.Remove(neighbor);
                         queue.Enqueue(neighbor);
                     }
-                }
             }
         }
+
         return 0;
     }
 
     private IList<string> GetNeighbors(string wordNode)
     {
-        char[] chars = wordNode.ToCharArray();
+        var chars = wordNode.ToCharArray();
         var result = new List<string>();
 
-        for (int i = 0; i < chars.Length; i++)
+        for (var i = 0; i < chars.Length; i++)
         {
-            char temp = chars[i];
-            for (char ch = 'a'; ch <= 'z'; ch++)
+            var temp = chars[i];
+            for (var ch = 'a'; ch <= 'z'; ch++)
             {
                 chars[i] = ch;
-                string neighbor = new string(chars);
+                var neighbor = new string(chars);
                 result.Add(neighbor);
             }
 
@@ -60,6 +58,4 @@ public class WordLadder
 
         return result;
     }
-
-
 }

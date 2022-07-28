@@ -30,12 +30,13 @@ public class PathWithMinimumEffortTests
                         new[] {1, 1, 1, 2, 1}
                     },
                     0
-                },
+                }
             };
         }
     }
 
-    [Theory, MemberData(nameof(TestDataProperty))]
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
     public void Path_w_ith_minimum_effort_tests(int[][] heights, int expected)
     {
         var result = new PathWithMinimumEffort().Get(heights);

@@ -2,7 +2,7 @@
 
 public class PathWithMinimumEffort
 {
-    private int[][] _directions =
+    private readonly int[][] _directions =
     {
         new[] {0, 1},
         new[] {1, 0},
@@ -12,21 +12,21 @@ public class PathWithMinimumEffort
 
     public int Get(int[][] heights)
     {
-        int rows = heights.Length;
-        int cols = heights[0].Length;
+        var rows = heights.Length;
+        var cols = heights[0].Length;
         var differenceMatrix = new int[rows][];
 
-        for (int i = 0; i < rows; i++)
+        for (var i = 0; i < rows; i++)
         {
             differenceMatrix[i] = new int[cols];
             System.Array.Fill(differenceMatrix[i], int.MaxValue);
         }
 
         differenceMatrix[0][0] = 0;
-        PriorityQueue<Cell, int> heap = new PriorityQueue<Cell, int>();
+        var heap = new PriorityQueue<Cell, int>();
 
-        bool[][] visited = new bool[rows][];
-        for (int i = 0; i < rows; i++)
+        var visited = new bool[rows][];
+        for (var i = 0; i < rows; i++)
             visited[i] = new bool[cols];
 
         heap.Enqueue(new Cell(0, 0, differenceMatrix[0][0]), differenceMatrix[0][0]);
@@ -36,21 +36,18 @@ public class PathWithMinimumEffort
             var currentCell = heap.Dequeue();
             visited[currentCell.x][currentCell.y] = true;
 
-            if (currentCell.x == rows - 1 && currentCell.y == cols - 1)
-            {
-                return currentCell.difference;
-            }
+            if (currentCell.x == rows - 1 && currentCell.y == cols - 1) return currentCell.difference;
 
             foreach (var direction in _directions)
             {
-                int adjacentX = currentCell.x + direction[0];
-                int adjacentY = currentCell.y + direction[1];
+                var adjacentX = currentCell.x + direction[0];
+                var adjacentY = currentCell.y + direction[1];
 
                 if (IsValidCell(adjacentX, adjacentY, rows, cols) && !visited[adjacentX][adjacentY])
                 {
-                    int currentDifference =
+                    var currentDifference =
                         Math.Abs(heights[adjacentX][adjacentY] - heights[currentCell.x][currentCell.y]);
-                    int maxDifference = Math.Max(currentDifference, differenceMatrix[currentCell.x][currentCell.y]);
+                    var maxDifference = Math.Max(currentDifference, differenceMatrix[currentCell.x][currentCell.y]);
 
                     if (differenceMatrix[adjacentX][adjacentY] > maxDifference)
                     {
@@ -60,21 +57,23 @@ public class PathWithMinimumEffort
                 }
             }
         }
-        
+
         return differenceMatrix[rows - 1][cols - 1];
     }
-    
-    bool IsValidCell(int x, int y, int row, int col) {
+
+    private bool IsValidCell(int x, int y, int row, int col)
+    {
         return x >= 0 && x <= row - 1 && y >= 0 && y <= col - 1;
     }
 
-    class Cell
+    private class Cell
     {
-        public int x;
-        public int y;
-        public int difference;
+        public readonly int difference;
+        public readonly int x;
+        public readonly int y;
 
-        public Cell(int x, int y, int difference) {
+        public Cell(int x, int y, int difference)
+        {
             this.x = x;
             this.y = y;
             this.difference = difference;

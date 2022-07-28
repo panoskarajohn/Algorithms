@@ -4,29 +4,30 @@ namespace Problems.Google.Recursion;
 
 public class LetterCombinations
 {
-    private readonly IReadOnlyDictionary<char, char[]> _phoneKeys = new Dictionary<char, char[]>()
+    private readonly List<string> _combinations = new();
+
+    private readonly IReadOnlyDictionary<char, char[]> _phoneKeys = new Dictionary<char, char[]>
     {
-        {'2', new char[]{ 'a', 'b', 'c' }},
-        {'3', new char[]{ 'd', 'e', 'f' }},
-        {'4', new char[]{ 'g', 'h', 'i' }},
-        {'5', new char[]{ 'j', 'k', 'l' }},
-        {'6', new char[]{ 'm', 'n', 'o' }},
-        {'7', new char[]{ 'p', 'q', 'r', 's' }},
-        {'8', new char[]{ 't', 'u', 'v' }},
-        {'9', new char[]{ 'w', 'x', 'y', 'z' }}
+        {'2', new[] {'a', 'b', 'c'}},
+        {'3', new[] {'d', 'e', 'f'}},
+        {'4', new[] {'g', 'h', 'i'}},
+        {'5', new[] {'j', 'k', 'l'}},
+        {'6', new[] {'m', 'n', 'o'}},
+        {'7', new[] {'p', 'q', 'r', 's'}},
+        {'8', new[] {'t', 'u', 'v'}},
+        {'9', new[] {'w', 'x', 'y', 'z'}}
     };
 
     private string _digits;
-    private readonly List<string> _combinations = new List<string>();
 
     public IList<string> Get(string digits)
     {
-        if(string.IsNullOrEmpty(digits))
+        if (string.IsNullOrEmpty(digits))
             return _combinations;
         _digits = digits;
-        
+
         Backtrack(0, new StringBuilder());
-    
+
         return _combinations;
     }
 

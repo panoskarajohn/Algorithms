@@ -6,20 +6,6 @@ namespace Problem.Tests.Google.GraphsTrees;
 
 public class LongestIncreasingPathTests
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Longest_Increasing_Path_Tests(int[][] data, int expected)
-    {
-        var result = new LongestIncreasingPath().Get(data);
-        result.Should().Be(expected);
-    }
-    
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Longest_Increasing_Path_DfsMem_Tests(int[][] data, int expected)
-    {
-        var result = new LongestIncreasingPath().GetDfsMemoization(data);
-        result.Should().Be(expected);
-    }
-    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -28,15 +14,31 @@ public class LongestIncreasingPathTests
             {
                 new object[]
                 {
-                    new[] {new[] {3, 4, 5}, new[] {3, 2,6}, new[] {2, 2,1}},
+                    new[] {new[] {3, 4, 5}, new[] {3, 2, 6}, new[] {2, 2, 1}},
                     4
                 },
                 new object[]
                 {
                     new[] {new[] {1}},
                     1
-                },
+                }
             };
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Longest_Increasing_Path_Tests(int[][] data, int expected)
+    {
+        var result = new LongestIncreasingPath().Get(data);
+        result.Should().Be(expected);
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Longest_Increasing_Path_DfsMem_Tests(int[][] data, int expected)
+    {
+        var result = new LongestIncreasingPath().GetDfsMemoization(data);
+        result.Should().Be(expected);
     }
 }

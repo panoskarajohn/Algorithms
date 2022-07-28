@@ -1,23 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Problems.Google.Recursion;
 
 namespace Problem.Tests.Google.Recursion;
 
-
 public class ReverseStringTests
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Reverse_String_Tests(char[] word, char[] expected)
-    {
-        var rev = new ReverseString();
-        rev.Reverse(word);
-        var wordStr = new string(word);
-        var expectedStr = new string(expected);
-        wordStr.Should().Be(expectedStr);
-    }
-    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -26,27 +14,38 @@ public class ReverseStringTests
             {
                 new object[]
                 {
-                    new char[]
+                    new[]
                     {
-                        'h', 'e', 'l', 'l', 'o',
+                        'h', 'e', 'l', 'l', 'o'
                     },
-                    new char[]
+                    new[]
                     {
-                        'o', 'l', 'l', 'e', 'h',
-                    },
+                        'o', 'l', 'l', 'e', 'h'
+                    }
                 },
                 new object[]
                 {
-                    new char[]
+                    new[]
                     {
-                        'H','a','n','n','a','h'
+                        'H', 'a', 'n', 'n', 'a', 'h'
                     },
-                    new char[]
+                    new[]
                     {
-                        'h','a','n','n','a','H'
-                    },
-                },
+                        'h', 'a', 'n', 'n', 'a', 'H'
+                    }
+                }
             };
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Reverse_String_Tests(char[] word, char[] expected)
+    {
+        var rev = new ReverseString();
+        rev.Reverse(word);
+        var wordStr = new string(word);
+        var expectedStr = new string(expected);
+        wordStr.Should().Be(expectedStr);
     }
 }

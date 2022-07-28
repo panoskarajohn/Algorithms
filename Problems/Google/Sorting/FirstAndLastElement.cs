@@ -4,43 +4,40 @@ public class FirstAndLastElement
 {
     public int[] Find(int[] nums, int target)
     {
-        int first = BinarySearch(nums, target, false);
+        var first = BinarySearch(nums, target, false);
 
         if (first == -1)
             return new[] {-1, -1};
 
-        int second = BinarySearch(nums, target, true);
-        return new int[] {first, second};
+        var second = BinarySearch(nums, target, true);
+        return new[] {first, second};
     }
 
-    int BinarySearch(int[] nums, int target, bool isOccured)
+    private int BinarySearch(int[] nums, int target, bool isOccured)
     {
-        int n = nums.Length;
-        int begin = 0;
-        int end = n - 1;
+        var n = nums.Length;
+        var begin = 0;
+        var end = n - 1;
 
         while (begin <= end)
         {
-            int mid = (begin + end) / 2;
+            var mid = (begin + end) / 2;
             if (nums[mid] == target)
             {
                 if (!isOccured)
                 {
-                    if (mid == begin || nums[mid -1] != target)
+                    if (mid == begin || nums[mid - 1] != target)
                         return mid;
                     end = mid - 1;
                 }
                 else
                 {
-                    if (mid == end || nums[mid + 1] != target)
-                    {
-                        return mid;
-                    }
+                    if (mid == end || nums[mid + 1] != target) return mid;
 
                     begin = mid + 1;
                 }
             }
-            else if(nums[mid] > target)
+            else if (nums[mid] > target)
             {
                 end = mid - 1;
             }

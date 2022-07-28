@@ -3,21 +3,21 @@
 public class CountOfSmallerNumberAfterSelf
 {
     /// <summary>
-    /// Segment Tree solution.
-    /// Super hard solution
+    ///     Segment Tree solution.
+    ///     Super hard solution
     /// </summary>
     /// <param name="nums"></param>
     /// <returns></returns>
     public IList<int> Count(int[] nums)
     {
-        int offset = 10000; //offset negative to non-negative
-        int size = 2 * offset + 1; // total possible values in nums
-        int[] tree = new int[size * 2]; // segment tree TODO: Look it up again
-        List<int> result = new List<int>();
+        var offset = 10000; //offset negative to non-negative
+        var size = 2 * offset + 1; // total possible values in nums
+        var tree = new int[size * 2]; // segment tree TODO: Look it up again
+        var result = new List<int>();
 
-        for (int i = nums.Length - 1; i >= 0; i--)
+        for (var i = nums.Length - 1; i >= 0; i--)
         {
-            int smallerCount = Query(0, nums[i] + offset, tree, size);
+            var smallerCount = Query(0, nums[i] + offset, tree, size);
             result.Add(smallerCount);
             Update(nums[i] + offset, 1, tree, size);
         }
@@ -40,7 +40,7 @@ public class CountOfSmallerNumberAfterSelf
 
     private int Query(int left, int right, int[] tree, int size)
     {
-        int result = 0;
+        var result = 0;
         left += size;
         right += size; // shift the index of the leaf
 
@@ -53,10 +53,10 @@ public class CountOfSmallerNumberAfterSelf
                 result += tree[left];
                 left++;
             }
-            
+
             //else directly move to parent
             left /= 2;
-            
+
             //if right is a right node
             // bring the value of the left node and move to parent
             if (right % 2 == 1)
@@ -64,12 +64,11 @@ public class CountOfSmallerNumberAfterSelf
                 right--;
                 result += tree[right];
             }
+
             // else directly move to parent
             right /= 2;
         }
 
         return result;
-
     }
-
 }

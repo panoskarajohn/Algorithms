@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using Problems.Google.Recursion;
+using Problems.Google.DP;
 
-namespace Problem.Tests.Google.Recursion;
+namespace Problem.Tests.Google.DP;
 
-public class FibonacciTests
+public class SplitArrayLargestSumTests
 {
     public static IEnumerable<object[]> TestDataProperty
     {
@@ -14,18 +14,21 @@ public class FibonacciTests
             {
                 new object[]
                 {
+                    new[] {7, 2, 5, 10, 8},
                     2,
-                    1
+                    18
                 },
                 new object[]
                 {
+                    new[] {1, 2, 3, 4, 5},
+                    2,
+                    9
+                },
+                new object[]
+                {
+                    new[] {1, 4, 4},
                     3,
-                    2
-                },
-                new object[]
-                {
-                    4,
-                    3
+                    4
                 }
             };
         }
@@ -33,9 +36,9 @@ public class FibonacciTests
 
     [Theory]
     [MemberData(nameof(TestDataProperty))]
-    public void Fibonacci_tests(int input, int expected)
+    public void Split_Array_Largest_Sum_Tests(int[] nums, int groups, int expected)
     {
-        var result = new Fibonacci().Fib(input);
+        var result = new SplitArrayLargestSum().SplitArray(nums, groups);
         result.Should().Be(expected);
     }
 }

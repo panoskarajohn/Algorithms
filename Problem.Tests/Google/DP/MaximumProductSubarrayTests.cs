@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using Problems.Google.Recursion;
+using Problems.Google.DP;
 
-namespace Problem.Tests.Google.Recursion;
+namespace Problem.Tests.Google.DP;
 
-public class FibonacciTests
+public class MaximumProductSubarrayTests
 {
     public static IEnumerable<object[]> TestDataProperty
     {
@@ -14,18 +14,18 @@ public class FibonacciTests
             {
                 new object[]
                 {
-                    2,
-                    1
+                    new[] {2, 3, -2, 4},
+                    6
                 },
                 new object[]
                 {
-                    3,
-                    2
+                    new[] {-2, 0, -1},
+                    0
                 },
                 new object[]
                 {
-                    4,
-                    3
+                    new[] {-2, 3, -4},
+                    24
                 }
             };
         }
@@ -33,9 +33,9 @@ public class FibonacciTests
 
     [Theory]
     [MemberData(nameof(TestDataProperty))]
-    public void Fibonacci_tests(int input, int expected)
+    public void Maximum_Product_Subarray_Tests(int[] nums, int expected)
     {
-        var result = new Fibonacci().Fib(input);
+        var result = new MaximumProductSubarray().MaxProduct(nums);
         result.Should().Be(expected);
     }
 }

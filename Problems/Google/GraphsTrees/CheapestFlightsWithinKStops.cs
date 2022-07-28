@@ -1,14 +1,12 @@
-﻿using System.Security.AccessControl;
-
-namespace Problems.Google.GraphsTrees;
+﻿namespace Problems.Google.GraphsTrees;
 
 public class CheapestFlightsWithinKStops
 {
-    private readonly Dictionary<int, List<(int cost, int dest)>> _graph 
+    private readonly Dictionary<int, List<(int cost, int dest)>> _graph
         = new();
 
     /// <summary>
-    /// Bellman ford approach
+    ///     Bellman ford approach
     /// </summary>
     /// <param name="n"></param>
     /// <param name="flights">graph</param>
@@ -23,21 +21,21 @@ public class CheapestFlightsWithinKStops
 
         if (flights is null || !flights.Any())
             return 0;
-        
+
         Span<int> prices = stackalloc int[n];
         FillSpan(prices);
         prices[src] = 0;
 
-        for (int i = 0; i < k + 1; i++)
+        for (var i = 0; i < k + 1; i++)
         {
             Span<int> tmpPrices = new int[n];
             prices.CopyTo(tmpPrices);
             foreach (var flight in flights)
             {
-                int source = flight[0];
-                int destination = flight[1];
-                int cost = flight[2];
-                
+                var source = flight[0];
+                var destination = flight[1];
+                var cost = flight[2];
+
                 if (prices[source] == int.MaxValue) continue;
                 if (prices[source] + cost < tmpPrices[destination])
                     tmpPrices[destination] = prices[source] + cost;
@@ -49,13 +47,9 @@ public class CheapestFlightsWithinKStops
         return prices[dst] == int.MaxValue ? -1 : prices[dst];
     }
 
-    void FillSpan(Span<int> span, int valueToFill = int.MaxValue)
+    private void FillSpan(Span<int> span, int valueToFill = int.MaxValue)
     {
-        int n = span.Length;
-        for (int i = 0; i < n; i++)
-        {
-            span[i] = valueToFill;
-        }
-        
+        var n = span.Length;
+        for (var i = 0; i < n; i++) span[i] = valueToFill;
     }
 }

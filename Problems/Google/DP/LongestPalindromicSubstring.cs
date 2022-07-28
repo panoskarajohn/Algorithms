@@ -7,14 +7,14 @@ public class LongestPalindromicSubstring
         if (string.IsNullOrEmpty(s))
             return string.Empty;
 
-        int start = 0;
-        int end = 0;
+        var start = 0;
+        var end = 0;
 
-        for (int i = 0; i < s.Length; i++)
+        for (var i = 0; i < s.Length; i++)
         {
-            int lengthOne = Expand(s, i, i);
-            int lengthTwo = Expand(s, i, i + 1);
-            int maxLength = Math.Max(lengthOne, lengthTwo);
+            var lengthOne = Expand(s, i, i);
+            var lengthTwo = Expand(s, i, i + 1);
+            var maxLength = Math.Max(lengthOne, lengthTwo);
 
             if (maxLength > end - start)
             {
@@ -23,7 +23,7 @@ public class LongestPalindromicSubstring
             }
         }
 
-        return s[start..(end+1)];
+        return s[start..(end + 1)];
     }
 
     private int Expand(string s, int left, int right)

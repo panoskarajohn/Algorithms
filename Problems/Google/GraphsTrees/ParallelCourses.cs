@@ -6,7 +6,7 @@ public class ParallelCourses
 
     public int MinNumberOfSemesters(int n, int[][] relations)
     {
-        var graph = CreateGraph(n, relations, out Dictionary<int, int> inDegree);
+        var graph = CreateGraph(n, relations, out var inDegree);
         var semesters = 0;
         var numberOfClasses = 0;
 
@@ -23,15 +23,13 @@ public class ParallelCourses
                 foreach (var neighbor in graph[zero])
                 {
                     inDegree[neighbor]--;
-                    if (inDegree[neighbor] == 0)
-                    {
-                        newQueue.Enqueue(neighbor);
-                    }
+                    if (inDegree[neighbor] == 0) newQueue.Enqueue(neighbor);
                 }
             }
 
             zeroDegree = newQueue;
         }
+
         return numberOfClasses == n ? semesters : -1;
     }
 
@@ -40,11 +38,9 @@ public class ParallelCourses
         var zeroDegree = new Queue<int>();
 
         foreach (var i in inDegree)
-        {
-            if(i.Value == 0)
+            if (i.Value == 0)
                 zeroDegree.Enqueue(i.Key);
-        }
-        
+
         return zeroDegree;
     }
 
@@ -52,22 +48,23 @@ public class ParallelCourses
     {
         var adjacencyList = new Dictionary<int, HashSet<int>>();
         inDegree = new Dictionary<int, int>();
-        for (int i = 1; i < n + 1; i++) //problem never starts from 0 no need to check that
+        for (var i = 1; i < n + 1; i++) //problem never starts from 0 no need to check that
         {
             inDegree.Add(i, 0);
             adjacencyList.Add(i, new HashSet<int>());
         }
-        
+
         foreach (var relation in relations)
         {
             adjacencyList[relation[0]].Add(relation[1]);
             inDegree[relation[1]]++;
         }
+
         return adjacencyList;
     }
 
     #endregion
-    
+
     #region DFS
 
     public int MinNumberOfSemestersDfs(int n, int[][] relations)
@@ -75,23 +72,21 @@ public class ParallelCourses
         var graph = BuildDfsGraph(n, relations);
         // We need to break the problem into two parts
         //Detect a cycle
-        int[] visited = new int[n + 1];
-        for (int i = 1; i < n + 1; i++)
-        {
+        var visited = new int[n + 1];
+        for (var i = 1; i < n + 1; i++)
             if (CheckDfsCycle(i, graph, visited) == -1)
                 return -1;
-        }
-        
+
         //We have not detected a cycle
         //Calculate the length of the longest path
-        int[] visitedLength = new int[n + 1];
-        int maxLength = 1;
-        for (int i = 1; i < n + 1; i++)
+        var visitedLength = new int[n + 1];
+        var maxLength = 1;
+        for (var i = 1; i < n + 1; i++)
         {
-            int length = DfsMaxPath(i, graph, visitedLength);
+            var length = DfsMaxPath(i, graph, visitedLength);
             maxLength = Math.Max(length, maxLength);
         }
-        
+
         return maxLength;
     }
 
@@ -100,10 +95,10 @@ public class ParallelCourses
         if (visitedLength[node] != 0)
             return visitedLength[node];
 
-        int max = 1;
+        var max = 1;
         foreach (var neighbors in graph[node])
         {
-            int length = DfsMaxPath(neighbors, graph, visitedLength);
+            var length = DfsMaxPath(neighbors, graph, visitedLength);
             max = Math.Max(length + 1, max);
         }
 
@@ -114,22 +109,13 @@ public class ParallelCourses
     private int CheckDfsCycle(int node, Dictionary<int, HashSet<int>> graph, int[] visited)
     {
         if (visited[node] != 0)
-        {
             return visited[node];
-        }
-        else
-        {
-            visited[node] = -1; //mark as visiting
-        }
+        visited[node] = -1; //mark as visiting
 
         foreach (var neighbor in graph[node])
-        {
             if (CheckDfsCycle(neighbor, graph, visited) == -1)
-            {
                 return -1;
-            }
-        }
-        
+
         visited[node] = 1; //mark as visited
         return 1;
     }
@@ -137,19 +123,12 @@ public class ParallelCourses
     private Dictionary<int, HashSet<int>> BuildDfsGraph(int n, int[][] relations)
     {
         Dictionary<int, HashSet<int>> adj = new();
-        for (int i = 1; i < n + 1; i++)
-        {
-            adj.Add(i, new HashSet<int>());
-        }
+        for (var i = 1; i < n + 1; i++) adj.Add(i, new HashSet<int>());
 
-        foreach (var relation in relations)
-        {
-            adj[relation[0]].Add(relation[1]);
-        }
+        foreach (var relation in relations) adj[relation[0]].Add(relation[1]);
 
         return adj;
     }
 
     #endregion
-    
 }

@@ -3,7 +3,7 @@
 public class MedianOfTwoSortedArrays
 {
     /// <summary>
-    /// We want to do it efficiently
+    ///     We want to do it efficiently
     /// </summary>
     /// <param name="num1"></param>
     /// <param name="num2"></param>
@@ -17,18 +17,18 @@ public class MedianOfTwoSortedArrays
         var low = 0;
         var high = num1.Length;
 
-        int combined = num1.Length + num2.Length;
+        var combined = num1.Length + num2.Length;
 
         while (low <= high)
         {
-            int partX = (low + high) / 2;
-            int partY = (combined + 1) / 2 - partX;
+            var partX = (low + high) / 2;
+            var partY = (combined + 1) / 2 - partX;
 
-            int leftX = GetMax(num1, partX);
-            int rightX = GetMin(num1, partX);
-            
-            int leftY = GetMax(num2, partY);
-            int rightY = GetMin(num2, partY);
+            var leftX = GetMax(num1, partX);
+            var rightX = GetMin(num1, partX);
+
+            var leftY = GetMax(num2, partY);
+            var rightY = GetMin(num2, partY);
 
             if (leftX <= rightY && leftY <= rightX)
             {
@@ -39,13 +39,9 @@ public class MedianOfTwoSortedArrays
             }
 
             if (leftX > rightY)
-            {
                 high = partX - 1;
-            }
             else
-            {
                 low = partX + 1;
-            }
         }
 
         return -1;
@@ -63,7 +59,7 @@ public class MedianOfTwoSortedArrays
     {
         if (partition == 0)
             return int.MinValue;
-        
+
         return nums[partition - 1];
     }
 }

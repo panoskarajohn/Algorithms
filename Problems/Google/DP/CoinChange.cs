@@ -17,9 +17,7 @@ public class CoinChange
 
         foreach (var coin in coins)
             for (var i = coin; i <= amount; i++)
-            {
                 dp[i] = Math.Min(dp[i], dp[i - coin] + 1);
-            }
 
         return dp[amount] == amount + 1 ? -1 : dp[amount];
     }
@@ -32,9 +30,7 @@ public class CoinChange
 
         foreach (var coin in coins)
             for (var i = coin; i <= amount; i++)
-            {
                 dp[i] += dp[i - coin];
-            }
 
         return dp[amount];
     }

@@ -3,15 +3,9 @@ using FluentAssertions;
 using Problems.Google.GraphsTrees;
 
 namespace Problem.Tests.Google.GraphsTrees;
+
 public class DecodeStringTests
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Decode_String_Tests(string s, string expected)
-    {
-        var result = new DecodeString().Decode(s);
-        result.Should().Be(expected);
-    }
-    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -32,9 +26,16 @@ public class DecodeStringTests
                 {
                     "2[abc]3[cd]ef",
                     "abcabccdcdcdef"
-                },
-
+                }
             };
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Decode_String_Tests(string s, string expected)
+    {
+        var result = new DecodeString().Decode(s);
+        result.Should().Be(expected);
     }
 }

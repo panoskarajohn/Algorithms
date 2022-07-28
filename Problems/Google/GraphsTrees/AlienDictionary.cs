@@ -3,12 +3,11 @@
 namespace Problems.Google.GraphsTrees;
 
 /// <summary>
-/// Check Dfs Comments
+///     Check Dfs Comments
 /// </summary>
 public class AlienDictionary
 {
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="words"></param>
     /// <returns>Graph or null if invalid</returns>
@@ -17,7 +16,7 @@ public class AlienDictionary
         // Example: wrt , wrf
         // Based on the above input
         // we are certain that t comes BEFORE f
-        
+
         // create adjacency list
         // add all characters with a new hashset of chars
         var adjacencyList = new Dictionary<char, HashSet<char>>();
@@ -25,7 +24,7 @@ public class AlienDictionary
         foreach (var ch in word)
             adjacencyList.TryAdd(ch, new HashSet<char>());
 
-        for (int i = 0; i < words.Length - 1; i++)
+        for (var i = 0; i < words.Length - 1; i++)
         {
             var wordOne = words[i];
             var wordTwo = words[i + 1];
@@ -43,14 +42,12 @@ public class AlienDictionary
                 return null;
 
             //We actually insert to the adjacency list
-            for (int j = 0; j < minLength; j++)
-            {
+            for (var j = 0; j < minLength; j++)
                 if (wordOne[j] != wordTwo[j])
                 {
                     adjacencyList[wordOne[j]].Add(wordTwo[j]);
                     break; // we break since there is no way to know order after inequality
                 }
-            }
         }
 
         return adjacencyList;
@@ -67,7 +64,7 @@ public class AlienDictionary
             inDegree.TryAdd(ch, 0);
         }
 
-        for (int i = 0; i < words.Length - 1; i++)
+        for (var i = 0; i < words.Length - 1; i++)
         {
             var wordOne = words[i];
             var wordTwo = words[i + 1];
@@ -77,8 +74,7 @@ public class AlienDictionary
             var hasSamePrefix = wordOne[..minLength] == wordTwo[..minLength];
             if (wordOneIsLarger && hasSamePrefix) return null;
 
-            for (int j = 0; j < minLength; j++)
-            {
+            for (var j = 0; j < minLength; j++)
                 if (wordOne[j] != wordTwo[j])
                 {
                     if (adjacencyList[wordOne[j]].Contains(wordTwo[j])) break;
@@ -86,15 +82,15 @@ public class AlienDictionary
                     inDegree[wordTwo[j]]++;
                     break;
                 }
-            }
         }
+
         return adjacencyList;
     }
 
     /// <summary>
-    /// Given words represented in a sorted order using the english letters
-    /// Based on the info given we have to return the order of the words
-    /// We have to find how to sort the letters
+    ///     Given words represented in a sorted order using the english letters
+    ///     Based on the info given we have to return the order of the words
+    ///     We have to find how to sort the letters
     /// </summary>
     /// <param name="words"></param>
     /// <returns></returns>
@@ -105,27 +101,23 @@ public class AlienDictionary
 
         var adjacencyList = CreateGraph(words);
 
-        if (adjacencyList is null) 
+        if (adjacencyList is null)
             return string.Empty;
-        
+
         var visited = new Dictionary<char, bool>(); // False = visited, True=current path
         var result = new StringBuilder();
-        
+
         foreach (var ch in adjacencyList.Keys)
-        {
             if (Dfs(ch)) // Detected a loop
-            {
-                return System.String.Empty;
-            }
-        }
+                return string.Empty;
 
         bool Dfs(char c)
         {
-            if (visited.ContainsKey(c)) 
+            if (visited.ContainsKey(c))
                 return visited[c];
             visited.Add(c, true);
-            
-            foreach(var neighbor in adjacencyList[c])
+
+            foreach (var neighbor in adjacencyList[c])
                 if (Dfs(neighbor))
                     return true;
 
@@ -140,17 +132,17 @@ public class AlienDictionary
         // Then we have to return no solution
         // Since a cycle has been detected
         // No way of proving order
-        
+
         // Use post order dfs!!!
         // This will result with the reverse order
         // we have to reverse the string returned
         return new string(result.ToString().Reverse().ToArray());
     }
-    
+
     /// <summary>
-    /// Given words represented in a sorted order using the english letters
-    /// Based on the info given we have to return the order of the words
-    /// We have to find how to sort the letters
+    ///     Given words represented in a sorted order using the english letters
+    ///     Based on the info given we have to return the order of the words
+    ///     We have to find how to sort the letters
     /// </summary>
     /// <param name="words"></param>
     /// <returns></returns>
@@ -160,15 +152,14 @@ public class AlienDictionary
             return string.Empty;
 
         var inDegree = new Dictionary<char, int>();
-        var adjacencyList = CreateGraph(words,inDegree);
+        var adjacencyList = CreateGraph(words, inDegree);
 
         var queue = new Queue<char>();
         var sb = new StringBuilder();
 
         foreach (var ch in inDegree.Keys)
-        {
-            if(inDegree[ch] == 0) queue.Enqueue(ch);
-        }
+            if (inDegree[ch] == 0)
+                queue.Enqueue(ch);
 
         while (queue.Any())
         {
@@ -178,7 +169,7 @@ public class AlienDictionary
             foreach (var neighbor in adjacencyList[current])
             {
                 inDegree[neighbor]--;
-                if(inDegree[neighbor] == 0)
+                if (inDegree[neighbor] == 0)
                     queue.Enqueue(neighbor);
             }
         }
@@ -187,5 +178,4 @@ public class AlienDictionary
 
         return sb.ToString();
     }
-    
 }
