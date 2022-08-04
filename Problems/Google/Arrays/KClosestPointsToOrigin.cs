@@ -1,6 +1,6 @@
 ﻿namespace Problems.Google.Arrays;
 
-public class ClosestPointsToOrigin
+public class KClosestPointsToOrigin
 {
     public static int[][] KClosest(int k, int[][] points)
     {

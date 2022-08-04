@@ -4,7 +4,7 @@ using Problems.Google.Arrays;
 
 namespace Problem.Tests.Google.Arrays;
 
-public class ClosestPointToOriginTests
+public class KClosestPointToOriginTests
 {
     public static IEnumerable<object[]> TestDataProperty
     {
@@ -32,7 +32,7 @@ public class ClosestPointToOriginTests
     [MemberData(nameof(TestDataProperty))]
     public void Closest_Point_To_Origin_Tests(int[][] points, int k, int[][] expected)
     {
-        var result = ClosestPointsToOrigin.KClosest(k, points);
+        var result = KClosestPointsToOrigin.KClosest(k, points);
         result.Should().BeEquivalentTo(expected);
     }
 }
