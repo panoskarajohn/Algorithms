@@ -64,8 +64,9 @@ public class Synonyms
         var split = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
         Dfs(split);
         
-        var res = _result.ToList();
-        res.Sort();
+        var res = _result
+            .ToList();
+        res.Sort(Compare);
         return res;
     }
 
@@ -111,5 +112,22 @@ public class Synonyms
             _graph[synonym[0]].Add(synonym[1]);
             _graph[synonym[1]].Add(synonym[0]);
         }
+    }
+
+    static int Compare(string s1, string s2)
+    {
+        int length = Math.Min(s1.Length, s2.Length);
+
+        for (int i = 0; i < length; i++)
+        {
+            if (s1[i] > s2[i])
+                return 1;
+
+            if (s1[i] < s2[i])
+                return -1;
+        }
+
+        return 0;
+
     }
 }
