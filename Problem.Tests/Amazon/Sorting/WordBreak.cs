@@ -4,13 +4,6 @@ namespace Problem.Tests.Amazon.Sorting;
 
 public class WordBreakTests
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Word_break_tests(string s, IList<string> words, bool expected)
-    {
-        var result = new WordBreak().AreWordsSegmentsOf(s, words);
-        result.Should().Be(expected);
-    }
-    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -20,17 +13,33 @@ public class WordBreakTests
                 new object[]
                 {
                     "leetcode",
-                    new List<string> {"leet","code"},
+                    new List<string> {"leet", "code"},
                     true
                 },
                 new object[]
                 {
                     "catsandog",
-                    new[] {"cats","dog","sand","and","cat"},
+                    new[] {"cats", "dog", "sand", "and", "cat"},
                     false
-                },
+                }
             };
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Word_break_tests(string s, IList<string> words, bool expected)
+    {
+        var result = new WordBreak().AreWordsSegmentsOf(s, words);
+        result.Should().Be(expected);
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Word_break_tests_bottom_up(string s, IList<string> words, bool expected)
+    {
+        var result = new WordBreak().AreWordsSegmentsOfDpBottomUp(s, words);
+        result.Should().Be(expected);
     }
 }
 
@@ -46,20 +55,34 @@ public class WordBreak
         if (start == s.Length)
             return true;
 
-        if (memo[start] is {})
+        if (memo[start] is { })
             return memo[start]!.Value;
 
-        for (int end = start + 1; end <= s.Length; end++)
-        {
+        for (var end = start + 1; end <= s.Length; end++)
             if (wordDict.Contains(s[start..end]) && WordBreakHelper(s, wordDict, end, memo))
             {
                 memo[start] = true;
                 return true;
             }
-        }
 
         memo[start] = false;
         return false;
+    }
 
+    public bool AreWordsSegmentsOfDpBottomUp(string s, IList<string> wordDict)
+    {
+        var n = s.Length;
+        var dp = new bool[n];
+
+        for (var i = 0; i < n; i++)
+            foreach (var word in wordDict)
+                if (i >= word.Length - 1 && (i == word.Length - 1 || dp[i - word.Length]))
+                    if (s[(i - word.Length + 1)..(i + 1)] == word)
+                    {
+                        dp[i] = true;
+                        break;
+                    }
+
+        return dp[n - 1];
     }
 }
