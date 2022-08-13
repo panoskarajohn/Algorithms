@@ -40,7 +40,7 @@ public class DecodeWaysTests
                 {
                     "2101",
                     1
-                },
+                }
             };
         }
     }
@@ -52,12 +52,20 @@ public class DecodeWaysTests
         var result = new DecodeWays().NumDecodings(s);
         result.Should().Be(expected);
     }
-    
+
     [Theory]
     [MemberData(nameof(TestDataProperty))]
     public void Decode_ways_Bottom_Up_tests(string s, int expected)
     {
         var result = new DecodeWays().NumWaysDecodingBottomUp(s);
+        result.Should().Be(expected);
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Decode_ways_Bottom_Up_Leet_tests(string s, int expected)
+    {
+        var result = new DecodeWays().NumWaysDecodingBottomUpClean(s);
         result.Should().Be(expected);
     }
 }
