@@ -1,9 +1,8 @@
-﻿
-namespace Problems.Amazon.Arrays;
+﻿namespace Problems.Amazon.Arrays;
 
 public class GroupAnagrams
 {
-    private Dictionary<string, List<string>> _map = new Dictionary<string, List<string>>();
+    private readonly Dictionary<string, List<string>> _map = new();
 
     public IList<IList<string>> Group(string[] strs)
     {
@@ -14,21 +13,15 @@ public class GroupAnagrams
             var strArray = str.ToCharArray();
             System.Array.Sort(strArray);
             var sorted = new string(strArray);
-            
-            if(_map.ContainsKey(sorted))
+
+            if (_map.ContainsKey(sorted))
                 _map[sorted].Add(str);
             else
-            {
-                _map[sorted] = new List<string>() {str};
-            }
+                _map[sorted] = new List<string> {str};
         }
 
-        foreach (var key in _map.Keys)
-        {
-            result.Add(_map[key]);
-        }
-        
+        foreach (var key in _map.Keys) result.Add(_map[key]);
+
         return result;
     }
-    
 }

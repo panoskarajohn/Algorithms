@@ -5,14 +5,6 @@ namespace Problem.Tests.Amazon.Recursion;
 
 public class NumberOfDiceRollsToTargetTests
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Number_of_dice_rolls_to_target_tests(int n, int k, int target, int expected)
-    {
-        var result = new NumberOfDiceRolls().NumRollsToTarget(n, k, target);
-        result.Should().Be(expected);
-
-    }
-    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -30,8 +22,16 @@ public class NumberOfDiceRollsToTargetTests
                 new object[]
                 {
                     30, 30, 500, 222616187
-                },
+                }
             };
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Number_of_dice_rolls_to_target_tests(int n, int k, int target, int expected)
+    {
+        var result = new NumberOfDiceRolls().NumRollsToTarget(n, k, target);
+        result.Should().Be(expected);
     }
 }

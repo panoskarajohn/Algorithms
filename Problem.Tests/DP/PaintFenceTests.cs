@@ -3,7 +3,7 @@ using Problems.DP;
 
 namespace Problem.Tests.DP;
 
-public class DeleteAndEarnTests
+public class PaintFenceTests
 {
     public static IEnumerable<object[]> TestDataProperty
     {
@@ -13,13 +13,11 @@ public class DeleteAndEarnTests
             {
                 new object[]
                 {
-                    new[] {3, 4, 2},
-                    6
+                    3, 2, 6
                 },
                 new object[]
                 {
-                    new[] {2, 2, 3, 3, 3, 4},
-                    9
+                    7, 2, 42
                 }
             };
         }
@@ -27,9 +25,17 @@ public class DeleteAndEarnTests
 
     [Theory]
     [MemberData(nameof(TestDataProperty))]
-    public void Delete_and_earn_tests(int[] nums, int expected)
+    public void Paint_fence_tests(int n, int k, int expected)
     {
-        var result = new DeleteAndEarn().Do(nums);
+        var result = new PaintFence().NumWays(n, k);
+        result.Should().Be(expected);
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Paint_fence_bottom_tests(int n, int k, int expected)
+    {
+        var result = new PaintFence().NumWaysBottomUp(n, k);
         result.Should().Be(expected);
     }
 }

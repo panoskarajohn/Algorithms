@@ -45,24 +45,23 @@ public class SearchInRotatedSortedArray
 {
     public int Search(int[] nums, int target)
     {
-        
         return BinarySearchInRotatedSortedArray(nums, target);
     }
 
     private int BinarySearchInRotatedSortedArray(int[] nums, int target)
     {
-        int n = nums.Length;
+        var n = nums.Length;
         if (n == 0)
             return -1;
-        
-        int left = 0;
-        int right = n - 1;
-        int first = nums[0];
+
+        var left = 0;
+        var right = n - 1;
+        var first = nums[0];
 
         while (left <= right)
         {
-            int mid = left + (right - left) / 2;
-            int value = nums[mid];
+            var mid = left + (right - left) / 2;
+            var value = nums[mid];
 
             if (value == target)
                 return mid;
@@ -70,26 +69,17 @@ public class SearchInRotatedSortedArray
             if (value >= first == target >= first)
             {
                 if (value < target)
-                {
                     left = mid + 1;
-                }
                 else
-                {
                     right = mid - 1;
-                }
             }
             else
             {
                 if (value >= first)
-                {
                     left = mid + 1;
-                }
                 else
-                {
                     right = mid - 1;
-                }
             }
-            
         }
 
         return -1;

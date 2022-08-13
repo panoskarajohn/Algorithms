@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
+﻿using System.Linq;
 using FluentAssertions;
 using Problems.Amazon.Graphs;
 
@@ -41,7 +39,7 @@ public class CriticalConnectionTests
                         new List<int> {4, 5},
                         new List<int> {5, 3}
                     },
-                    new List<IList<int>>() { new List<int>() { 1,3 } }
+                    new List<IList<int>> {new List<int> {1, 3}}
                 }
             };
         }

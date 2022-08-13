@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Net;
 
 namespace Problem.Tests.Google.DP;
 
@@ -39,20 +37,20 @@ public class LongestIncreasingSubsequence
     /// <returns></returns>
     public int GetOpt(int[] nums)
     {
-        int n = nums.Length;
+        var n = nums.Length;
         var subSequence = new List<int>();
         subSequence.Add(nums[0]);
 
-        for (int i = 1; i < n; i++)
+        for (var i = 1; i < n; i++)
         {
-            int num = nums[i];
+            var num = nums[i];
             if (num > subSequence[^1])
             {
                 subSequence.Add(num);
             }
             else
             {
-                int getRight = BinarySearch(subSequence, num);
+                var getRight = BinarySearch(subSequence, num);
                 subSequence[getRight] = num;
             }
         }
@@ -69,21 +67,16 @@ public class LongestIncreasingSubsequence
         while (left < right)
         {
             mid = (left + right) / 2;
-            
+
             if (subSequence[mid] == num)
                 return mid;
 
             if (subSequence[mid] < num)
-            {
                 left = mid + 1;
-            }
             else
-            {
                 right = mid;
-            }
         }
 
         return left;
     }
-
 }

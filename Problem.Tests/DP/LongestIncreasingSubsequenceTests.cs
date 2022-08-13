@@ -42,7 +42,7 @@ public class LongestIncreasingSubsequenceTests
         var result = new LongestIncreasingSubsequence().Get(data);
         result.Should().Be(expected);
     }
-    
+
     [Theory]
     [MemberData(nameof(TestDataProperty))]
     public void Longest_increasing_subsequence_BS_tests(int[] data, int expected)

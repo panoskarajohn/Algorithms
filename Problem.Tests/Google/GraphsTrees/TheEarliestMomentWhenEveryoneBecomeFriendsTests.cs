@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Problems.Google.GraphsTrees;
 
 namespace Problem.Tests.Google.GraphsTrees;

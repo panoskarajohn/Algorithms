@@ -3,16 +3,8 @@ using Problems.DP;
 
 namespace Problem.Tests.DP;
 
-
 public class NthTribonacciNumberTests
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Nth_tribonacci_number_tests(int n, int expected)
-    {
-        var result = new NthTribonacciNumbers().Get(n);
-        result.Should().Be(expected);
-    }
-    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -28,8 +20,16 @@ public class NthTribonacciNumberTests
                 {
                     25,
                     1_389_537
-                },
+                }
             };
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Nth_tribonacci_number_tests(int n, int expected)
+    {
+        var result = new NthTribonacciNumbers().Get(n);
+        result.Should().Be(expected);
     }
 }

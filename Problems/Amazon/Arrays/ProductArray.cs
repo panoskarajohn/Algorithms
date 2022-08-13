@@ -11,35 +11,32 @@ public class ProductArray
 
         for (var i = 0; i < n; i++)
         {
-            int previousIndex = i - 1;
-            var prefix = (previousIndex < 0) ? 1 : prefixProduct[i - 1];
-            var previous = (previousIndex < 0) ? 1 : values[i - 1];
+            var previousIndex = i - 1;
+            var prefix = previousIndex < 0 ? 1 : prefixProduct[i - 1];
+            var previous = previousIndex < 0 ? 1 : values[i - 1];
 
             prefixProduct[i] = prefix * previous;
         }
 
-        for (int i = n - 1; i >= 0; i--)
+        for (var i = n - 1; i >= 0; i--)
         {
-            int nextIndex = i + 1;
-            var suffix = (nextIndex >= n) ? 1 : suffixProduct[i + 1];
-            var next = (nextIndex >= n) ? 1 : values[i + 1];
+            var nextIndex = i + 1;
+            var suffix = nextIndex >= n ? 1 : suffixProduct[i + 1];
+            var next = nextIndex >= n ? 1 : values[i + 1];
 
             suffixProduct[i] = suffix * next;
         }
 
-        int[] result = new int[n];
+        var result = new int[n];
 
-        for (int i = 0; i < n; i++)
-        {
-            result[i] = prefixProduct[i] * suffixProduct[i];
-        }
+        for (var i = 0; i < n; i++) result[i] = prefixProduct[i] * suffixProduct[i];
 
         return result;
     }
 
     /// <summary>
-    /// O(1) space
-    /// result array does not count
+    ///     O(1) space
+    ///     result array does not count
     /// </summary>
     /// <param name="values"></param>
     /// <returns></returns>
@@ -50,9 +47,9 @@ public class ProductArray
 
         for (var i = 0; i < n; i++)
         {
-            int previousIndex = i - 1;
-            var prefix = (previousIndex < 0) ? 1 : result[previousIndex];
-            var previous = (previousIndex < 0) ? 1 : values[previousIndex];
+            var previousIndex = i - 1;
+            var prefix = previousIndex < 0 ? 1 : result[previousIndex];
+            var previous = previousIndex < 0 ? 1 : values[previousIndex];
 
             result[i] = prefix * previous;
         }

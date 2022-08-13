@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Problems.Amazon;
 
 namespace Problem.Tests.Amazon;
@@ -13,30 +11,29 @@ public class PlatesBetweenCandlesTests
         {
             return new[]
             {
-                new Object[]
+                new object[]
                 {
-                    "***|**|*****|**||**|*", 
-                    new int[][]
+                    "***|**|*****|**||**|*",
+                    new[]
                     {
-                        new int[] {1,17},
-                        new int[] {4,5},
-                        new int[] {14,17},
-                        new int[] {5,11},
-                        new int[] {15,16},
+                        new[] {1, 17},
+                        new[] {4, 5},
+                        new[] {14, 17},
+                        new[] {5, 11},
+                        new[] {15, 16}
                     },
-                    new int[] {9,0,0,0,0}
+                    new[] {9, 0, 0, 0, 0}
                 },
-                new Object[]
+                new object[]
                 {
-                    "**|**|***|", 
-                    new int[][]
+                    "**|**|***|",
+                    new[]
                     {
-                        new int[] {2,5},
-                        new int[] {5,9},
+                        new[] {2, 5},
+                        new[] {5, 9}
                     },
-                    new int[] {2,3}
-                },
-                
+                    new[] {2, 3}
+                }
             };
         }
     }

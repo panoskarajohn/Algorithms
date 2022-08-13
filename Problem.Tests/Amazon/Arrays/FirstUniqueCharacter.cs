@@ -1,17 +1,9 @@
-﻿using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 
 namespace Problem.Tests.Amazon.Arrays;
 
 public class FirstUniqueCharacter
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void First_unique_character(string s, int expected)
-    {
-        var result = new FirstUniqueChar().GetFirstIndex(s);
-        result.Should().Be(expected);
-    }
-    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -32,10 +24,17 @@ public class FirstUniqueCharacter
                 {
                     "aabb",
                     -1
-                },
-                
+                }
             };
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void First_unique_character(string s, int expected)
+    {
+        var result = new FirstUniqueChar().GetFirstIndex(s);
+        result.Should().Be(expected);
     }
 }
 
@@ -45,7 +44,7 @@ public class FirstUniqueChar
     {
         var map = new Dictionary<char, int>();
 
-        for (int i = 0; i < s.Length; i++)
+        for (var i = 0; i < s.Length; i++)
         {
             var current = s[i];
             if (!map.ContainsKey(current))
@@ -53,7 +52,7 @@ public class FirstUniqueChar
             map[current]++;
         }
 
-        for (int i = 0; i < s.Length; i++)
+        for (var i = 0; i < s.Length; i++)
         {
             var current = s[i];
             if (map[current] == 1)

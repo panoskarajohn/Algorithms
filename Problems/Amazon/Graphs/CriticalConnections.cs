@@ -1,63 +1,55 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-
-namespace Problems.Amazon.Graphs;
+﻿namespace Problems.Amazon.Graphs;
 
 public class CriticalConnections
 {
-    private Dictionary<int, HashSet<int>> _graph;
-    private Dictionary<int, int> _rank;
-    private Dictionary<(int from, int to), bool> _connectionDictionary;
+    private readonly Dictionary<(int from, int to), bool> _connectionDictionary;
+    private readonly Dictionary<int, HashSet<int>> _graph;
+    private readonly Dictionary<int, int> _rank;
 
     public CriticalConnections()
     {
-        this._graph = new Dictionary<int, HashSet<int>>();
-        this._rank = new Dictionary<int, int>();
-        this._connectionDictionary = new Dictionary<(int from, int to), bool>();
+        _graph = new Dictionary<int, HashSet<int>>();
+        _rank = new Dictionary<int, int>();
+        _connectionDictionary = new Dictionary<(int from, int to), bool>();
     }
+
     public IList<IList<int>> Get(int n, IList<IList<int>> connections)
     {
         var result = new List<IList<int>>();
         BuildGraph(n, connections);
         Dfs(0, 0);
 
-        foreach (var conn in _connectionDictionary.Keys) 
-        {
-            result.Add(new List<int>() { conn.from, conn.to });
-        }
+        foreach (var conn in _connectionDictionary.Keys) result.Add(new List<int> {conn.from, conn.to});
 
         return result;
-        
     }
 
     private int Dfs(int node, int discoveryRank)
     {
         //that means this node is already visit. We simply return the rank
-        if (this._rank[node] != -1)
-        {
-            return _rank[node];
-        }
-        
+        if (_rank[node] != -1) return _rank[node];
+
         //update the rank of this node
         _rank[node] = discoveryRank;
-        
+
         //This is the max we have seen till now. So we start with this instead of INT_MAX or something
-        int minRank = discoveryRank + 1;
+        var minRank = discoveryRank + 1;
 
         foreach (var neighbor in _graph[node])
         {
-            int neighborRank = _rank[neighbor];
+            var neighborRank = _rank[neighbor];
             // not visited and is not previous rank
-            if(neighborRank != -1 && neighborRank == discoveryRank - 1)
-                 continue;
-            
+            if (neighborRank != -1 && neighborRank == discoveryRank - 1)
+                continue;
+
             //Recurse the neighbor
-            int recursiveRank = Dfs(neighbor, discoveryRank + 1);
+            var recursiveRank = Dfs(neighbor, discoveryRank + 1);
 
             //Check if this edge needs to be discarded
             if (recursiveRank <= discoveryRank)
             {
-                int u = Math.Min(node, neighbor);
-                int v = Math.Max(node, neighbor);
+                var u = Math.Min(node, neighbor);
+                var v = Math.Max(node, neighbor);
 
                 _connectionDictionary.Remove((u, v));
             }
@@ -69,13 +61,12 @@ public class CriticalConnections
     }
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="n"></param>
     /// <param name="connections"></param>
     private void BuildGraph(int n, IList<IList<int>> connections)
     {
-        for (int i = 0; i < n; i++)
+        for (var i = 0; i < n; i++)
         {
             _graph.Add(i, new HashSet<int>());
             _rank.Add(i, -1);
@@ -83,18 +74,15 @@ public class CriticalConnections
 
         foreach (var connection in connections)
         {
-            int u = connection[0];
-            int v = connection[1];
+            var u = connection[0];
+            var v = connection[1];
 
             _graph[u].Add(v);
             _graph[v].Add(u);
-            int start = Math.Min(u, v);
-            int end = Math.Max(u, v);
-            
+            var start = Math.Min(u, v);
+            var end = Math.Max(u, v);
+
             _connectionDictionary.TryAdd((start, end), true);
         }
     }
-    
-    
-    
 }

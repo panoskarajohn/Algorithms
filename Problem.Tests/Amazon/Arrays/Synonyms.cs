@@ -56,21 +56,21 @@ public class SynonymsTests
 public class Synonyms
 {
     private readonly Dictionary<string, HashSet<string>> _graph = new();
-    private readonly HashSet<string> _result = new HashSet<string>();
+    private readonly HashSet<string> _result = new();
 
     public IList<string> GenerateSentences(IList<IList<string>> synonyms, string text)
     {
         BuildGraph(synonyms);
         var split = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
         Dfs(split);
-        
+
         var res = _result
             .ToList();
         res.Sort(Compare);
         return res;
     }
 
-    void Dfs(string[] wordsFromSentence)
+    private void Dfs(string[] wordsFromSentence)
     {
         var newSentence = string.Join(" ", wordsFromSentence);
         if (_result.Contains(newSentence))
@@ -78,7 +78,7 @@ public class Synonyms
 
         _result.Add(newSentence);
 
-        for (int i = 0; i < wordsFromSentence.Length; i++)
+        for (var i = 0; i < wordsFromSentence.Length; i++)
         {
             var wordToReplace = wordsFromSentence[i];
             if (!_graph.ContainsKey(wordToReplace))
@@ -94,31 +94,25 @@ public class Synonyms
         }
     }
 
-    void BuildGraph(IList<IList<string>> synonyms)
+    private void BuildGraph(IList<IList<string>> synonyms)
     {
         foreach (var synonym in synonyms)
         {
-            if (!_graph.ContainsKey(synonym[0]))
-            {
-                _graph[synonym[0]] = new HashSet<string>();
-            }
-            
-            if (!_graph.ContainsKey(synonym[1]))
-            {
-                _graph[synonym[1]] = new HashSet<string>();
-            }
+            if (!_graph.ContainsKey(synonym[0])) _graph[synonym[0]] = new HashSet<string>();
 
-            
+            if (!_graph.ContainsKey(synonym[1])) _graph[synonym[1]] = new HashSet<string>();
+
+
             _graph[synonym[0]].Add(synonym[1]);
             _graph[synonym[1]].Add(synonym[0]);
         }
     }
 
-    static int Compare(string s1, string s2)
+    private static int Compare(string s1, string s2)
     {
-        int length = Math.Min(s1.Length, s2.Length);
+        var length = Math.Min(s1.Length, s2.Length);
 
-        for (int i = 0; i < length; i++)
+        for (var i = 0; i < length; i++)
         {
             if (s1[i] > s2[i])
                 return 1;
@@ -128,6 +122,5 @@ public class Synonyms
         }
 
         return 0;
-
     }
 }

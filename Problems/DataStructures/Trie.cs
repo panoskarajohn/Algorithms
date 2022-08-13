@@ -2,7 +2,8 @@
 
 public class Trie
 {
-    private TrieNode _root;
+    private readonly TrieNode _root;
+
     public Trie()
     {
         _root = new TrieNode();
@@ -37,7 +38,6 @@ public class Trie
         }
 
         return current.IsEndOfWord;
-
     }
 
     public bool StartsWith(string prefix)
@@ -58,13 +58,12 @@ public class Trie
 
 public class TrieNode
 {
-    private readonly Dictionary<char, TrieNode> _children;
-    public Dictionary<char, TrieNode> Children => _children;
-
-    public bool IsEndOfWord { get; set; }
-
     public TrieNode()
     {
-        _children = new Dictionary<char, TrieNode>();
+        Children = new Dictionary<char, TrieNode>();
     }
+
+    public Dictionary<char, TrieNode> Children { get; }
+
+    public bool IsEndOfWord { get; set; }
 }

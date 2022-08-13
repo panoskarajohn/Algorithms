@@ -5,13 +5,6 @@ namespace Problem.Tests.Array;
 
 public class GroupAnagramsTests
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Group_anagrams_tests(string[] strs, IList<IList<string>> expected)
-    {
-        var result = new GroupAnagrams().Group(strs);
-        result.Should().BeEquivalentTo(expected);
-    }
-    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -20,16 +13,23 @@ public class GroupAnagramsTests
             {
                 new object[]
                 {
-                    new [] {"eat","tea","tan","ate","nat","bat"},
-                    new List<IList<string>>()
+                    new[] {"eat", "tea", "tan", "ate", "nat", "bat"},
+                    new List<IList<string>>
                     {
-                        new List<string>() {"bat"},
-                        new List<string>() {"nat", "tan"},
-                        new List<string>() { "ate","eat","tea" }
+                        new List<string> {"bat"},
+                        new List<string> {"nat", "tan"},
+                        new List<string> {"ate", "eat", "tea"}
                     }
-                    
                 }
             };
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Group_anagrams_tests(string[] strs, IList<IList<string>> expected)
+    {
+        var result = new GroupAnagrams().Group(strs);
+        result.Should().BeEquivalentTo(expected);
     }
 }

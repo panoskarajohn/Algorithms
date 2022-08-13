@@ -24,7 +24,7 @@ public class MaximalSquaresTests
                 {
                     new[]
                     {
-                        new[] { '0', '1'}, new[] {'1', '0'}
+                        new[] {'0', '1'}, new[] {'1', '0'}
                     },
                     1
                 },
@@ -32,7 +32,7 @@ public class MaximalSquaresTests
                 {
                     new[]
                     {
-                        new[] { '0'}
+                        new[] {'0'}
                     },
                     0
                 }

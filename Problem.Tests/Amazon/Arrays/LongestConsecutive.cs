@@ -5,13 +5,6 @@ namespace Problem.Tests.Amazon.Arrays;
 
 public class LongestConsecutiveTests
 {
-    [Theory, MemberData(nameof(TestDataProperty))]
-    public void Longest_consecutive_tests(int[] data, int exp)
-    {
-        var result = new LongestConsecutive().Longest(data);
-        result.Should().Be(exp);
-    }
-    
     public static IEnumerable<object[]> TestDataProperty
     {
         get
@@ -20,39 +13,43 @@ public class LongestConsecutiveTests
             {
                 new object[]
                 {
-                    new int[] {100,4,200,1,3,2},
+                    new[] {100, 4, 200, 1, 3, 2},
                     4
                 }
             };
         }
     }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Longest_consecutive_tests(int[] data, int exp)
+    {
+        var result = new LongestConsecutive().Longest(data);
+        result.Should().Be(exp);
+    }
 }
 
 public class LongestConsecutive
 {
-    public int Longest(int[] nums) {
-        
+    public int Longest(int[] nums)
+    {
         var set = new HashSet<int>(nums);
-        int max = 0;
-        
-        for(int i = 0; i < nums.Length; i++)
+        var max = 0;
+
+        for (var i = 0; i < nums.Length; i++)
         {
             var current = nums[i];
             var isStart = !set.Contains(current - 1);
-            if(isStart)
+            if (isStart)
             {
-                int length = 0;
-                
-                while(set.Contains(current + length))
-                {
-                    length++;
-                }
-                
+                var length = 0;
+
+                while (set.Contains(current + length)) length++;
+
                 max = Math.Max(max, length);
             }
         }
-        
+
         return max;
-        
     }
 }

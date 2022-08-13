@@ -57,7 +57,7 @@ public class BestTimeToBuyAndSellStockFour
         for (var i = 0; i < n + 1; i++)
         {
             dp[i] = new int[k + 1][];
-            for (var j = 0; j < k + 1; j++) 
+            for (var j = 0; j < k + 1; j++)
                 dp[i][j] = new int[2];
         }
 

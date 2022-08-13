@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Problems.Google.Sorting;
 
 namespace Problem.Tests.Google.Sorting;

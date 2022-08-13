@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Problems.Google.Recursion;
 
 namespace Problem.Tests.Google.Recursion;

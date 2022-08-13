@@ -40,7 +40,7 @@ public class MinimumDifficultyJobScheduleTests
         var result = new MinimumDifficultyJobSchedule().MinDifficultyTopDown(data, days);
         result.Should().Be(expected);
     }
-    
+
     [Theory]
     [MemberData(nameof(TestDataProperty))]
     public void Minimum_difficulty_job_schedule_tests_bottom_up(int[] data, int days, int expected)
@@ -48,7 +48,7 @@ public class MinimumDifficultyJobScheduleTests
         var result = new MinimumDifficultyJobSchedule().MinDifficultyBottomUp(data, days);
         result.Should().Be(expected);
     }
-    
+
     [Theory]
     [MemberData(nameof(TestDataProperty))]
     public void Minimum_difficulty_job_schedule_tests_bottom_up_opt(int[] data, int days, int expected)

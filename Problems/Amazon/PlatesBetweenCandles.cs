@@ -3,7 +3,7 @@
 public class PlatesBetweenCandles
 {
     /// <summary>
-    /// Using prefix sum
+    ///     Using prefix sum
     /// </summary>
     /// <param name="s"></param>
     /// <param name="queries"></param>
@@ -19,30 +19,27 @@ public class PlatesBetweenCandles
          */
 
 
-        int n = s.Length;
+        var n = s.Length;
 
-        int[] prefixSum = new int[n];
-        int[] candleLeft = new int[n];
-        int[] candleRight = new int[n];
+        var prefixSum = new int[n];
+        var candleLeft = new int[n];
+        var candleRight = new int[n];
 
         prefixSum[0] = s[0] == '*' ? 1 : 0;
         candleLeft[0] = s[0] == '|' ? 0 : -1;
 
-        for (int i = 1; i < n; i++)
+        for (var i = 1; i < n; i++)
         {
             prefixSum[i] = prefixSum[i - 1] + (s[i] == '*' ? 1 : 0);
             candleLeft[i] = s[i] == '|' ? i : candleLeft[i - 1];
         }
-        
+
         candleRight[n - 1] = s[n - 1] == '|' ? n - 1 : n;
 
-        for (int i = n - 2; i >= 0 ; i--)
-        {
-            candleRight[i] = s[i] == '|' ? i : candleRight[i + 1];
-        }
+        for (var i = n - 2; i >= 0; i--) candleRight[i] = s[i] == '|' ? i : candleRight[i + 1];
 
-        int[] result = new int[queries.Length];
-        for (int i = 0; i < queries.Length; i++)
+        var result = new int[queries.Length];
+        for (var i = 0; i < queries.Length; i++)
         {
             /*
              * 0 1 2 3 4 5 6 7 8 9
@@ -53,8 +50,8 @@ public class PlatesBetweenCandles
              * In that case our start will be 9 and end will be 4
              * 
              */
-            int start = candleRight[queries[i][0]];
-            int end = candleLeft[queries[i][1]];
+            var start = candleRight[queries[i][0]];
+            var end = candleLeft[queries[i][1]];
 
             result[i] = start > end ? 0 : prefixSum[end] - prefixSum[start];
         }

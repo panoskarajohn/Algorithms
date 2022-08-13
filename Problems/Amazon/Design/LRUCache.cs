@@ -1,15 +1,12 @@
-﻿using System.Collections.ObjectModel;
-using Problems.Google.GraphsTrees;
-
-namespace Problems.Amazon.Design;
+﻿namespace Problems.Amazon.Design;
 
 public class LRUCache
 {
+    private readonly Dictionary<int, (LinkedListNode<int> node, int value)> _cache;
 
     private readonly int _capacity;
-    private readonly Dictionary<int, (LinkedListNode<int> node, int value)> _cache;
     private readonly LinkedList<int> _list;
-    
+
     public LRUCache(int capacity)
     {
         _capacity = capacity;

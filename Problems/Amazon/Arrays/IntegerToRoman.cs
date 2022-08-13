@@ -1,11 +1,14 @@
-﻿using System.Collections.ObjectModel;
-using System.Text;
-using Problems.Google.GraphsTrees;
+﻿using System.Text;
 
 namespace Problems.Amazon.Arrays;
 
 public class IntegerToRoman
 {
+    private readonly HashSet<char> _combo = new()
+    {
+        'I', 'X', 'C'
+    };
+
     private readonly IReadOnlyDictionary<int, string> _intRomanMap = new Dictionary<int, string>
     {
         {1, "I"},
@@ -21,11 +24,6 @@ public class IntegerToRoman
         {500, "D"},
         {900, "CM"},
         {1000, "M"}
-    };
-
-    private readonly HashSet<char> _combo = new()
-    {
-        'I', 'X', 'C'
     };
 
     public string ConvertFromInteger(int number)
@@ -46,5 +44,4 @@ public class IntegerToRoman
 
         return sb.ToString();
     }
-    
 }
