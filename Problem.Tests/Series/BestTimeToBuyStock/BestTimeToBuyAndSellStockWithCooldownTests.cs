@@ -1,7 +1,8 @@
 ﻿using FluentAssertions;
 using Problems.DP;
+using Problems.Series.BestTimeToBuyStock;
 
-namespace Problem.Tests.DP;
+namespace Problem.Tests.Series.BestTimeToBuyStock;
 
 public class BestTimeToBuyAndSellStockWithCooldownTests
 {

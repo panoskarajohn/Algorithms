@@ -1,4 +1,4 @@
-﻿namespace Problems.DP;
+﻿namespace Problems.Series.BestTimeToBuyStock;
 
 public class BestTimeToBuyAndSellStockWithCooldown
 {
@@ -35,7 +35,9 @@ public class BestTimeToBuyAndSellStockWithCooldown
 
     public int MaxProfitWithCooldownOpt(int[] prices)
     {
-        int sold = int.MinValue, held = int.MinValue, reset = 0;
+        int sold = int.MinValue;
+        int held = int.MinValue;
+        int reset = 0;
 
         foreach (var price in prices)
         {

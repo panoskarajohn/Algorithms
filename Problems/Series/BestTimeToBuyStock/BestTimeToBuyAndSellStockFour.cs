@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Problem.Tests.Google.DP;
+﻿namespace Problems.Series.BestTimeToBuyStock;
 
 public class BestTimeToBuyAndSellStockFour
 {

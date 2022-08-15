@@ -1,4 +1,4 @@
-﻿namespace Problems.Google.DP;
+﻿namespace Problems.Series.BestTimeToBuyStock;
 
 public class BestTimeToBuyAndSellStock
 {
