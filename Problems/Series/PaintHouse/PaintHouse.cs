@@ -7,8 +7,7 @@ public class PaintHouse
         if (costs is null || costs.Length == 0)
             return 0;
 
-        int min = int.MinValue;
-        for (int i = 1; i < costs.Length; i++)
+        for (var i = 1; i < costs.Length; i++)
         {
             costs[i][0] += Math.Min(costs[i - 1][1], costs[i - 1][2]);
             costs[i][1] += Math.Min(costs[i - 1][0], costs[i - 1][2]);
@@ -16,9 +15,5 @@ public class PaintHouse
         }
 
         return costs[^1].Min();
-
     }
 }
-
-
-

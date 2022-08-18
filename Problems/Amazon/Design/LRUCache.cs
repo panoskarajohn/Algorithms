@@ -20,6 +20,7 @@ public class LRUCache
             return -1;
 
         var node = _cache[key];
+        
         _list.Remove(node.node);
         _list.AddFirst(node.node);
 
