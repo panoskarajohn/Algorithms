@@ -2,11 +2,10 @@
 
 public class PaintHouseThree
 {
+    private const int MaxCost = 1_000_001;
     private int[][][] _memo;
 
     #region TopDown
-
-    private const int MaxCost = 1_000_001;
 
     public int MinCostTopDown(int[] houses, int[][] costs, int m, int n, int target)
     {
@@ -60,6 +59,81 @@ public class PaintHouseThree
         }
 
         return _memo;
+    }
+
+    #endregion
+
+    #region Bottom up
+
+    public int MinCostBottomUp(int[] houses, int[][] costs, int m, int n, int target)
+    {
+        FillMemo(m - 1, target, n - 1);
+        
+        //initialize memo array with max cost
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j <= target; j++)
+            {
+                System.Array.Fill(_memo[i][j], MaxCost);
+            }
+        }
+
+        for (int color = 1; color <= n; color++)
+        {
+            if (houses[0] == color)
+            {
+                // if the house has same color, no cost
+                _memo[0][1][color - 1] = 0;
+            }
+            else if(houses[0] == 0)
+            {
+                _memo[0][1][color - 1] = costs[0][color - 1];
+            }
+        }
+
+        for (int house = 1; house < m; house++)
+        {
+            for (int neighborhoods = 1; neighborhoods <= Math.Min(target, house + 1); neighborhoods++)
+            {
+                for (int color = 1; color <= n; color++)
+                {
+                    if (houses[house] != 0 && color != houses[house])
+                    {
+                        continue;
+                    }
+
+                    int currentCost = MaxCost;
+                    
+                    //iterate over all the possible color for previous house
+                    for (int prevColor = 1; prevColor <= n; prevColor++)
+                    {
+                        if (prevColor != color)
+                        {
+                            // decrement the neighborhood as adjacent houses have different color
+                            currentCost = Math.Min(currentCost, _memo[house - 1][neighborhoods - 1][prevColor - 1]);
+                        }
+                        else
+                        {
+                            currentCost = Math.Min(currentCost, _memo[house - 1][neighborhoods][color - 1]);
+                        }
+                    }
+                    
+                    //if the house is already painted, cost to paint is 0
+                    int costToPaint = houses[house] != 0 ? 0 : costs[house][color - 1];
+                    _memo[house][neighborhoods][color - 1] = currentCost + costToPaint;
+                }
+            }
+        }
+
+        int min = MaxCost;
+        
+        // Find the minimum cost with m houses and target neighborhoods
+        // By comparing cost for different color for the last house
+        for (int color = 1; color <= n; color++) {
+            min = Math.Min(min, _memo[m - 1][target][color - 1]);
+        }
+
+        return min == MaxCost ? -1 : min;
     }
 
     #endregion

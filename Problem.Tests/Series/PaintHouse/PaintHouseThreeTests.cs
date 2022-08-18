@@ -49,4 +49,12 @@ public class PaintHouseThreeTests
         var result = new PaintHouseThree().MinCostTopDown(houses, costs, m, n, target);
         result.Should().Be(expected);
     }
+    
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Paint_house_three_bottom_up_tests(int[] houses, int[][] costs, int m, int n, int target, int expected)
+    {
+        var result = new PaintHouseThree().MinCostBottomUp(houses, costs, m, n, target);
+        result.Should().Be(expected);
+    }
 }
