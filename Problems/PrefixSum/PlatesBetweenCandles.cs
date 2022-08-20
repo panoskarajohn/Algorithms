@@ -1,4 +1,4 @@
-﻿namespace Problems.Amazon;
+﻿namespace Problems.PrefixSum;
 
 public class PlatesBetweenCandles
 {

@@ -1,7 +1,8 @@
 ﻿using FluentAssertions;
 using Problems.Amazon;
+using Problems.PrefixSum;
 
-namespace Problem.Tests.Amazon;
+namespace Problem.Tests.PrefixSum;
 
 public class PlatesBetweenCandlesTests
 {
