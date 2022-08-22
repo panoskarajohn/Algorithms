@@ -1,4 +1,4 @@
-﻿namespace Problems.Google.Arrays;
+﻿namespace Problems.Heap;
 
 public class FindKthLargestElement
 {

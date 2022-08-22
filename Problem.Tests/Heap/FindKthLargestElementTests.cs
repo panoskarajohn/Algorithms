@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Problems.Google.Arrays;
+using Problems.Heap;
 
 namespace Problem.Tests.Google.Arrays;
 

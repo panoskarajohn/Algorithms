@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Problems.Google.Arrays;
 
-namespace Problem.Tests.Google.Arrays;
+namespace Problem.Tests.Heap;
 
 public class KClosestPointToOriginTests
 {
