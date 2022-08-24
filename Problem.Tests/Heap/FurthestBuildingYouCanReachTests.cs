@@ -36,4 +36,12 @@ public class FurthestBuildingYouCanReachTests
         var result = new FurthestBuildingYouCanReach().FurthestBuilding(data, bricks, ladders);
         result.Should().Be(expected);
     }
+    
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Furthest_building_you_can_reach_BS_tests(int[] data, int bricks, int ladders, int expected)
+    {
+        var result = new FurthestBuildingYouCanReach().FurthestBuilding_BS(data, bricks, ladders);
+        result.Should().Be(expected);
+    }
 }
