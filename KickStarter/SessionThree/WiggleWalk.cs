@@ -4,9 +4,17 @@ namespace KickStarter.SessionThree;
 
 public class WiggleWalk
 {
+    private static readonly Dictionary<char, char> _reverse = new()
+    {
+        {'N', 'S'},
+        {'S', 'N'},
+        {'E', 'W'},
+        {'W', 'E'}
+    };
+
     private int _cols;
 
-    Dictionary<char, int[]> _directionMap = new()
+    private readonly Dictionary<char, int[]> _directionMap = new()
     {
         {'N', new[] {-1, 0}},
         {'E', new[] {0, 1}},
@@ -15,6 +23,7 @@ public class WiggleWalk
     };
 
     private int _rows;
+
 
     public int[] GetLastPositionAfterInstructions(
         int numberOfInstructions,
@@ -44,24 +53,29 @@ public class WiggleWalk
         if (cache.ContainsKey((instruction, currentRow, currentCol)))
             destination = cache[(instruction, currentRow, currentCol)];
         else
-        {
-            destination =  GetDestination(instruction, currentRow, currentCol); 
-        }
-        
+            destination = GetDestination(instruction, currentRow, currentCol);
+
         while (visited.Contains(destination))
         {
             var temp = GetDestination(instruction, destination.row, destination.col);
+
+            if (cache.ContainsKey((instruction, temp.row, temp.col)))
+                temp = cache[(instruction, temp.row, temp.col)];
+
             if (temp.row < 0 || temp.row > _rows || temp.col < 0 || temp.col > _cols)
             {
                 visited.Add(destination);
                 cache[(instruction, currentRow, currentCol)] = destination;
+                cache[(_reverse[instruction], destination.row, destination.col)] = (currentRow, currentCol);
                 return destination;
             }
 
             destination = temp;
         }
 
+        // the issue was that we need to one reverse one as well...FUCK ME so close
         visited.Add(destination);
+        cache[(_reverse[instruction], destination.row, destination.col)] = (currentRow, currentCol);
         return cache[(instruction, currentRow, currentCol)] = destination;
     }
 

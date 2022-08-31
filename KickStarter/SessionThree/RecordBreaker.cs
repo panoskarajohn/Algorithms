@@ -30,20 +30,21 @@ public class RecordBreaker
     {
         var anwer = 0;
         var max = int.MinValue;
-        var count = new int[numOfDays];
+        var count = 0;
         for (var i = 0; i < numOfDays; i++)
         {
             if (visitors[i] > max)
             {
                 max = visitors[i];
-                count[i]++;
+                count++;
             }
 
             if (i == numOfDays - 1)
-                count[i]++;
-            else if (visitors[i] > visitors[i + 1]) count[i]++;
+                count++;
+            else if (visitors[i] > visitors[i + 1]) count++;
 
-            if (count[i] == 2) anwer++;
+            if (count == 2) anwer++;
+            count = 0; // reset
         }
 
         return anwer;
