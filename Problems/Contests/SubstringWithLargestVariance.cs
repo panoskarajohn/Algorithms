@@ -1,4 +1,5 @@
-﻿using Problems.PrefixSum;
+﻿using System.Text;
+using Problems.PrefixSum;
 
 namespace Problems.Contests;
 
@@ -6,63 +7,70 @@ public class SubstringWithLargestVariance
 {
     public int LargestVariance(string s)
     {
-        var n = s.Length;
-        var seen = new HashSet<int>();
-        var s2 = new int[n];
-        for (var i = 0; i < n; i++)
+        int answer = 0;
+        char a = 'a';
+        for (int i = 0; i < 26; i++)
         {
-            var current = s[i] - 'a';
-            seen.Add(current);
-            s2[i] = current;
+            for (int j = 0; j < 26; j++)
+            {
+                if (a + i != a + j)
+                {
+                    int subAnswer = Kadane((char)(a + i), (char)(a + j), s);
+                    answer = Math.Max(answer, subAnswer);
+                }
+            }
         }
 
-        var max = 0;
+        return answer;
+    }
 
-        for (var i = 0; i < 26; i++)
-            if (seen.Contains(i))
-                for (var j = 0; j < 26; j++)
-                    if (seen.Contains(j) && i != j)
-                    {
-                        var left = 0;
-                        var lastT = -1;
-                        var count = 0;
-                        var prefix = 0;
-                        var minx = 0;
+    /// <summary>
+    /// 1. kadane(a,b) is not symmetric, kadane(a,b) != kadane(b,a)
+    /// 2. finer details
+    ///  -> Iterate over the pairs
+    /// 
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    int Kadane(char a, char b, string s)
+    {
+        int answer = 0;
 
-                        for (var t = 0; t < n; t++)
-                        {
-                            if (s2[t] == i)
-                            {
-                                count++;
-                            }
-                            else if (s2[t] == j)
-                            {
-                                count--;
-                                lastT = t;
-                            }
+        int countA = 0, countB = 0;
+        bool canExtendPreviousB = false;
 
-                            while (left < lastT)
-                            {
-                                if (s2[left] == i)
-                                    prefix++;
-                                else if (s2[left] == j) prefix--;
+        for (int i = 0; i < s.Length; i++)
+        {
+            var current = s[i];
+            if (current != a && current != b)
+            {
+                continue;
+            }
 
-                                if (minx > prefix)
-                                {
-                                    minx = prefix;
-                                }
+            if (current == a)
+                countA++;
+            else
+            {
+                countB++;
+            }
 
-                                left++;
-                            }
+            if (countB > 0) // we need at least one b
+                answer = Math.Max(answer, countA - countB);
+            else if (countB == 0 && canExtendPreviousB)
+            {
+                // consider/imagine a prefix
+                answer = Math.Max(answer, countA - 1);
+            }
 
-                            if (lastT != -1 && count - minx > max)
-                            {
-                                max = count - minx;
-                            }
-
-                        }
-                    }
-
-        return max;
+            if (countB > countA)
+            {
+                countA = 0;
+                countB = 0;
+                canExtendPreviousB = true;
+            }
+        }
+        
+        return answer;
     }
 }
