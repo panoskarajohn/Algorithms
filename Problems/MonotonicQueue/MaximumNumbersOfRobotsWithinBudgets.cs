@@ -7,26 +7,40 @@ public class MaximumNumbersOfRobotsWithinBudgets
         var max = int.MinValue;
         var n = chargeTimes.Length;
         var left = 0;
-        var right = n - 1;
+        var right = 0;
 
-        while (left < right)
+        var queue = new LinkedList<int>();
+        var count = 0;
+        var currentSum = 0L;
+
+        while (right < n)
         {
-            var subCharge = chargeTimes[left..right];
-            var subRunningCosts = runningCosts[left..right];
-            long k = chargeTimes.Length;
+            currentSum += runningCosts[right];
+            count++;
+            while (queue.Any() && queue.Last!.Value < chargeTimes[right])
+                queue.RemoveLast();
 
-            var totalCost = subCharge.Max() + k * subRunningCosts.Sum();
+            queue.AddLast(chargeTimes[right]);
 
-            if (totalCost <= budget)
-                if (right - left + 1 > max)
-                    max = right - left + 1;
+            var cost = queue.First!.Value + count * currentSum;
 
-            if (runningCosts[left] + chargeTimes[left] < runningCosts[right] + chargeTimes[right])
-                right--;
-            else
+            while (cost > budget)
+            {
+                currentSum -= runningCosts[left];
+                count--;
+                if (queue.Any() && queue.First.Value == chargeTimes[left])
+                    queue.RemoveFirst();
                 left++;
+                if (count == 0)
+                    break;
+
+                cost = queue.First.Value + count * currentSum;
+            }
+
+            max = Math.Max(max, count);
+            right++;
         }
 
-        return max == int.MinValue ? 0 : max;
+        return max;
     }
 }
