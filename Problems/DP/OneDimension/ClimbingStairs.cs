@@ -1,4 +1,4 @@
-﻿namespace Problems.Google.Recursion;
+﻿namespace Problems.DP.OneDimension;
 
 public class ClimbingStairs
 {
@@ -26,5 +26,19 @@ public class ClimbingStairs
         var result = oneStep + twoStep;
         _cache.Add(currentStep, result);
         return result;
+    }
+
+    public int ClimbBottomUp(int n)
+    {
+        int one = 1, two = 1;
+
+        for (var i = 0; i < n - 1; i++)
+        {
+            var temp = one;
+            one = one + two;
+            two = temp;
+        }
+
+        return one;
     }
 }

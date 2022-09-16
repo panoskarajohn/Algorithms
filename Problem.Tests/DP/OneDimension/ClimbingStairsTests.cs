@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using Problems.Google.Recursion;
+using Problems.DP.OneDimension;
 
-namespace Problem.Tests.Google.Recursion;
+namespace Problem.Tests.DP.OneDimension;
 
 public class ClimbingStairsTests
 {
@@ -35,6 +35,14 @@ public class ClimbingStairsTests
     public void Climbing_stairs_Tests(int steps, int expected)
     {
         var result = new ClimbingStairs().Climb(steps);
+        result.Should().Be(expected);
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Climbing_stairs_bottom_up_Tests(int steps, int expected)
+    {
+        var result = new ClimbingStairs().ClimbBottomUp(steps);
         result.Should().Be(expected);
     }
 }
