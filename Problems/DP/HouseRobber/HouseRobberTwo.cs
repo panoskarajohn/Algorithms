@@ -26,13 +26,11 @@ public class HouseRobberTwo
 
         for (var i = start; i < end; i++)
         {
-            var temp = t1;
-            var current = nums[i];
-            t1 = Math.Max(current + t2, t1);
-
+            var temp = Math.Max(nums[i] + t1, t2);
+            t1 = t2;
             t2 = temp;
         }
 
-        return t1;
+        return t2;
     }
 }
