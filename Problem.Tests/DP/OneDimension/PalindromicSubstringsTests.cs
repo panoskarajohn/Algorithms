@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
-using Problems.Google.DP;
+using Problems.DP.OneDimension;
 
-namespace Problem.Tests.Google.DP;
+namespace Problem.Tests.DP.OneDimension;
 
-public class LongestPalindromicSubstringTests
+public class PalindromicSubstringsTests
 {
     public static IEnumerable<object[]> TestDataProperty
     {
@@ -13,13 +13,11 @@ public class LongestPalindromicSubstringTests
             {
                 new object[]
                 {
-                    "babad",
-                    "aba"
+                    "abc", 3
                 },
                 new object[]
                 {
-                    "cbbd",
-                    "bb"
+                    "aaa", 6
                 }
             };
         }
@@ -27,9 +25,9 @@ public class LongestPalindromicSubstringTests
 
     [Theory]
     [MemberData(nameof(TestDataProperty))]
-    public void Longest_Palindromic_Substring_Tests(string s, string expected)
+    public void Palindromic_Substrings_Tests(string data, int expected)
     {
-        var result = new LongestPalindromicSubstring().Get(s);
+        var result = new PalindromicSubstrings().CountSubstrings(data);
         result.Should().Be(expected);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Problems.Google.DP;
+﻿namespace Problems.DP.OneDimension;
 
 public class LongestPalindromicSubstring
 {
