@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
-using Problems.DP;
 
-namespace Problem.Tests.DP;
+namespace Problem.Tests.DP.HouseRobber;
 
 public class HouseRobberTests
 {
@@ -29,7 +28,15 @@ public class HouseRobberTests
     [MemberData(nameof(TestDataProperty))]
     public void House_robber_tests(int[] data, int expected)
     {
-        var result = new HouseRobber().Rob(data);
+        var result = new Problems.DP.HouseRobber.HouseRobber().Rob(data);
+        result.Should().Be(expected);
+    }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void House_robber_faster_tests(int[] data, int expected)
+    {
+        var result = new Problems.DP.HouseRobber.HouseRobber().RobTwoValues(data);
         result.Should().Be(expected);
     }
 }
