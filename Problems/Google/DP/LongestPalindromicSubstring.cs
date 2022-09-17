@@ -12,8 +12,8 @@ public class LongestPalindromicSubstring
 
         for (var i = 0; i < s.Length; i++)
         {
-            var lengthOne = Expand(s, i, i);
-            var lengthTwo = Expand(s, i, i + 1);
+            var lengthOne = Expand(s, i, i); // odd palindromes
+            var lengthTwo = Expand(s, i, i + 1); // edge case for even palindromes
             var maxLength = Math.Max(lengthOne, lengthTwo);
 
             if (maxLength > end - start)
