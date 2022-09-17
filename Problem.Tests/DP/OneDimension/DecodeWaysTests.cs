@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using Problems.DP;
+using Problems.DP.OneDimension;
 
-namespace Problem.Tests.DP;
+namespace Problem.Tests.DP.OneDimension;
 
 public class DecodeWaysTests
 {

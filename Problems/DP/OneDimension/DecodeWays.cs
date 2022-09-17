@@ -1,4 +1,4 @@
-﻿namespace Problems.DP;
+﻿namespace Problems.DP.OneDimension;
 
 public class DecodeWays
 {
