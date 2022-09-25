@@ -3,7 +3,7 @@ Practice algorithms. Hoping I get better at it.
 99% of problems come from LeetCode so that is why descriptions were neglected
 
 Some of the best channels to learn algorithms, at least these are my goto.
-And many solutions are inspired by them or leetcode discussions/editorials.
+Many solutions are inspired by them or leetcode discussions/editorials.
 
 ### https://www.youtube.com/c/Algorithmist
 ### https://www.youtube.com/c/NeetCode
