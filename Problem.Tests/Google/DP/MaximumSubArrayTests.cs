@@ -37,4 +37,12 @@ public class MaximumSubArrayTests
         var result = new MaximumSubarray().MaxSubArray(nums);
         result.Should().Be(expected);
     }
+
+    [Theory]
+    [MemberData(nameof(TestDataProperty))]
+    public void Maximum_sub_array_2_tests(int[] nums, int expected)
+    {
+        var result = new MaximumSubarray().MaxSubArray2(nums);
+        result.Should().Be(expected);
+    }
 }
