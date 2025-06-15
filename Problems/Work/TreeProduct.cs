@@ -44,7 +44,6 @@ public class TreeProductSolution
                 var edge1 = uniqueEdges[i];
                 var edge2 = uniqueEdges[j];
                 
-                // Remove edges
                 RemoveEdge(graph, edge1);
                 RemoveEdge(graph, edge2);
                 
