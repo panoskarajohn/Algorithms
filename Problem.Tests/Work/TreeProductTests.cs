@@ -6,6 +6,7 @@ public class TreeProductTests
 {
     [Theory]
     [InlineData(new int[] { 0, 1, 1, 3, 3, 6, 7 }, new int[] { 1, 2, 3, 4, 5, 3, 5 }, 18)]
+    [InlineData(new int[] { 0, 1 }, new int[] { 1, 2 }, 3)]
     public void Test1(int[] numsA, int[] numsB, int expected)
     {
         var actual = TreeProductSolution.TreeProduct(numsA, numsB);

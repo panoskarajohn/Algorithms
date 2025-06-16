@@ -12,30 +12,29 @@ public class TreeProductSolution
     {
         var graph = BuildGraph(numsA, numsB);
         var groups = GetAllSubtreesWithTwoCuts(graph);
-        
+
         int maxProduct = 0;
         foreach (var group in groups)
         {
-            if (group.Count == 3)
+            int product = 1;
+            foreach (var subtree in group)
             {
-                int product = 1;
-                foreach (var subtree in group)
-                {
-                    product *= subtree.Count;
-                }
-                maxProduct = Math.Max(maxProduct, product);
+                product *= subtree.Count;
             }
+
+            maxProduct = Math.Max(maxProduct, product);
         }
-        
-        
+
+
         return maxProduct;
     }
-    
+
     private static List<List<List<int>>> GetAllSubtreesWithTwoCuts(Dictionary<int, List<int>> graph)
     {
         var result = new List<List<List<int>>>();
         var uniqueEdges = GetUniqueEdges(graph);
-        
+        result.Add(GetComponents(graph));
+
         //iterate over all unique edges
         for (int i = 0; i < uniqueEdges.Count; i++)
         {
@@ -43,29 +42,46 @@ public class TreeProductSolution
             {
                 var edge1 = uniqueEdges[i];
                 var edge2 = uniqueEdges[j];
-                
+
                 RemoveEdge(graph, edge1);
                 RemoveEdge(graph, edge2);
-                
+
                 var components = GetComponents(graph);
                 if (components.Count == 3)
                 {
                     result.Add(components);
                 }
-                
+
                 AddEdge(graph, edge1);
                 AddEdge(graph, edge2);
             }
+            
+            for (int j = i + 1; j < uniqueEdges.Count; j++)
+            {
+                var edge1 = uniqueEdges[i];
+                var edge2 = uniqueEdges[j];
+
+                RemoveEdge(graph, edge1);
+                
+
+                var components = GetComponents(graph);
+                if (components.Count == 3)
+                {
+                    result.Add(components);
+                }
+
+                AddEdge(graph, edge1);
+            }
         }
-        
+
         return result;
     }
-    
+
     private static List<List<int>> GetComponents(Dictionary<int, List<int>> graph)
     {
         var visited = new HashSet<int>();
         var components = new List<List<int>>();
-        
+
         foreach (var node in graph.Keys)
         {
             if (!visited.Contains(node))
@@ -75,7 +91,7 @@ public class TreeProductSolution
                 components.Add(component);
             }
         }
-        
+
         return components;
     }
 
@@ -98,26 +114,27 @@ public class TreeProductSolution
             }
         }
     }
-    
+
     private static void AddEdge(Dictionary<int, List<int>> graph, (int start, int finish) edge)
     {
         if (graph.ContainsKey(edge.start) && !graph[edge.start].Contains(edge.finish))
         {
             graph[edge.start].Add(edge.finish);
         }
-        
+
         if (graph.ContainsKey(edge.finish) && !graph[edge.finish].Contains(edge.start))
         {
             graph[edge.finish].Add(edge.start);
         }
     }
-    
+
     private static void RemoveEdge(Dictionary<int, List<int>> graph, (int start, int finish) edge)
     {
         if (graph.ContainsKey(edge.start))
         {
             graph[edge.start].Remove(edge.finish);
         }
+
         if (graph.ContainsKey(edge.finish))
         {
             graph[edge.finish].Remove(edge.start);
@@ -129,7 +146,7 @@ public class TreeProductSolution
         var edges = new List<(int, int)>();
         foreach (var kvp in graph)
         {
-            foreach(var neighbor in kvp.Value)
+            foreach (var neighbor in kvp.Value)
             {
                 var startingEdge = kvp.Key;
                 if (startingEdge < neighbor) // to avoid duplicates
@@ -138,30 +155,30 @@ public class TreeProductSolution
                 }
             }
         }
-        
+
         return edges;
     }
- 
+
     static Dictionary<int, List<int>> BuildGraph(int[] numsA, int[] numsB)
     {
         var graph = new Dictionary<int, List<int>>();
         for (int i = 0; i < numsA.Length; i++)
         {
-            AddEdge(graph,(numsA[i],numsB[i]));
+            AddEdge(graph, (numsA[i], numsB[i]));
             if (!graph.ContainsKey(numsA[i]))
             {
                 graph[numsA[i]] = new List<int>();
             }
+
             graph[numsA[i]].Add(numsB[i]);
             if (!graph.ContainsKey(numsB[i]))
             {
                 graph[numsB[i]] = new List<int>();
             }
+
             graph[numsB[i]].Add(numsA[i]);
         }
 
         return graph;
     }
-
-    
 }
